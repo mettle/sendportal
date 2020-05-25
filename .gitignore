@@ -10,3 +10,7 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+.idea
+public/vendor/
+resources/lang/vendor/
+resources/views/vendor/
