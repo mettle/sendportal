@@ -175,7 +175,7 @@ return [
             ],
             'supervisor-2' => [
                 'connection' => 'redis',
-                'queue' => ['message-dispatch'],
+                'queue' => [config('sendportal.queue.message-dispatch')],
                 'balance' => 'auto',
                 'minProcesses' => 2,
                 'maxProcesses' => 20,
@@ -183,7 +183,7 @@ return [
             ],
             'supervisor-3' => [
                 'connection' => 'redis',
-                'queue' => ['webhook-process'],
+                'queue' => [config('sendportal.queue.webhook-process')],
                 'balance' => 'auto',
                 'minProcesses' => 2,
                 'maxProcesses' => 10,
@@ -200,7 +200,7 @@ return [
             ],
             'supervisor-2' => [
                 'connection' => 'redis',
-                'queue' => ['message-dispatch'],
+                'queue' => [config('sendportal.queue.message-dispatch')],
                 'balance' => 'auto',
                 'minProcesses' => 2,
                 'maxProcesses' => 20,
@@ -208,7 +208,7 @@ return [
             ],
             'supervisor-3' => [
                 'connection' => 'redis',
-                'queue' => ['webhook-process'],
+                'queue' => [config('sendportal.queue.webhook-process')],
                 'balance' => 'auto',
                 'minProcesses' => 2,
                 'maxProcesses' => 10,
