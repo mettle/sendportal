@@ -1,3 +1,6 @@
-### Things changed in the original code here:
-- auth.php User model reference 
-
+# SendPortal
+​
+Open-source self-hosted email marketing. Manage your own newsletters at a fraction of the cost.
+​
+- [Website](https://sendportal.io)
+- [Documentation](https://sendportal.io/docs)
