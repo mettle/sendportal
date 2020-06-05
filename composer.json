@@ -1,12 +1,7 @@
 {
-    "name": "laravel/laravel",
+    "name": "mettle/sendportal",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": [
-        "framework",
-        "laravel"
-    ],
-    "license": "MIT",
+    "description": "SendPortal. Open-source self-hosted email marketing. Manage your own newsletters at a fraction of the cost.",
     "require": {
         "php": "^7.2.5",
         "fideloper/proxy": "^4.2",
@@ -16,9 +11,10 @@
         "laravel/horizon": "^4.3",
         "laravel/tinker": "^2.0",
         "mettle/laracatch-client": "^1.1",
-        "sendportal/base": "dev-master"
+        "mettle/sendportal-core": "^1.0"
     },
     "require-dev": {
+        "roave/security-advisories": "dev-master",
         "fzaninotto/faker": "^1.9.1",
         "mockery/mockery": "^1.3.1",
         "nunomaduro/collision": "^4.1",
@@ -61,12 +57,5 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ]
-    },
-    "repositories": [
-        {
-            "type": "path",
-            "symlink": true,
-            "url": "../sendportal_base"
-        }
-    ]
+    }
 }
