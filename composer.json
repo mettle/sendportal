@@ -2,7 +2,6 @@
     "name": "mettle/sendportal",
     "type": "project",
     "description": "SendPortal. Open-source self-hosted email marketing. Manage your own newsletters at a fraction of the cost.",
-    "license": "MIT",
     "require": {
         "php": "^7.2.5",
         "fideloper/proxy": "^4.2",
