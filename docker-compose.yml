@@ -1,0 +1,35 @@
+version: '3.1'
+
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: sendportal-nginx
+    working_dir: /application
+    volumes:
+      - .:/application
+      - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "80:80"
+
+  php:
+    build: docker/php-fpm
+    container_name: sendportal-php
+    #    working_dir: /application
+    volumes:
+      - .:/application
+      - ./docker/php-fpm/php-ini-overrides.ini:/etc/php/7.3/fpm/conf.d/99-overrides.ini
+
+  mysql:
+    image: mysql:5.7
+    command: --lower_case_table_names=1
+    ports:
+      - "3306:3306"
+    volumes:
+      - ../mysqldata:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
