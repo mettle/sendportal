@@ -1,0 +1,12 @@
+provider: laravel:6
+laravel:
+  build:
+    - 'composer install --classmap-authoritative'
+    # - 'php artisan event:cache'
+    - 'npm install && npm run production && rm -rf node_modules'
+  deploy:
+    - 'php artisan migrate --force'
+    - 'php artisan db:seed --force'
+  environment:
+    - APP_DEBUG: "true"
+    - APP_NAME: "Sendportal"
