@@ -11,7 +11,7 @@
         "laravel/framework": "^7.0",
         "laravel/horizon": "^4.3",
         "laravel/tinker": "^2.0",
-        "mettle/sendportal-core": "^1.0"
+        "mettle/sendportal-core": "dev-master"
     },
     "require-dev": {
         "roave/security-advisories": "dev-master",
@@ -57,5 +57,14 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ]
-    }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../sendportal-core",
+            "options": {
+                "symlink": true
+            }
+        }
+    ]
 }

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Sendportal\Base\Facades\Sendportal;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +24,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Sendportal::currentWorkspaceIdResolver(function() {
+            return auth()->user()->currentWorkspaceId();
+        });
+
+        Sendportal::siderbarHtmlContentResolver(function() {
+            return view('layouts.sidebar.manageUsersMenuItem')->render();
+        });
+
+        Sendportal::headerHtmlContentResolver(function() {
+            return view('layouts.header.userManagementHeader')->render();
+        });
     }
 }

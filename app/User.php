@@ -2,13 +2,15 @@
 
 namespace App;
 
+use App\Traits\HasWorkspaces;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
+    use HasWorkspaces;
 
     /**
      * The attributes that are mass assignable.
@@ -16,24 +18,31 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'email_verified_at',
+        'password',
+        'api_token',
+        'locale'
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
+     * The attributes excluded from the model's JSON form.
      *
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     /**
-     * The attributes that should be cast to native types.
+     * Return user avatar url
      *
-     * @var array
+     * @return string
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function getAvatarAttribute(): string
+    {
+        return 'https://www.gravatar.com/avatar/'.md5($this->email).'?s=80&d=mm&r=g';
+    }
 }
