@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Sendportal\Base\Http\Controllers\Workspaces;
+namespace App\Http\Controllers\Workspaces;
 
 use Illuminate\Http\Request;
-use Sendportal\Base\Models\Workspace;
+use App\Workspace;
 use Illuminate\Http\RedirectResponse;
 
 class SwitchWorkspaceController

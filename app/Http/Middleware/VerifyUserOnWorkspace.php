@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use Sendportal\Base\Models\Workspace;
+use App\Workspace;
 use Closure;
 
 class VerifyUserOnWorkspace

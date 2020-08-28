@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Sendportal\Base\Http\Controllers\Auth;
+namespace App\Http\Controllers\Auth;
 
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Sendportal\Base\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 
 class LoginController extends Controller
 {
@@ -18,7 +18,7 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
-        return view('sendportal::auth.login');
+        return view('auth.login');
     }
 
     protected function redirectTo(): string

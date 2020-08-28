@@ -2,24 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Sendportal\Base\Http\Controllers\Auth;
+namespace App\Http\Controllers\Auth;
 
-use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
-use Sendportal\Base\Http\Controllers\Controller;
-use Sendportal\Base\Http\Requests\ProfileUpdateRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\ProfileUpdateRequest;
 
 class ProfileController extends Controller
 {
     public function show(): View
     {
-        return view('sendportal::profile.show');
+        return view('profile.show');
     }
 
     public function edit(): View
     {
-        return view('sendportal::profile.edit');
+        return view('profile.edit');
     }
 
     public function update(ProfileUpdateRequest $request): RedirectResponse

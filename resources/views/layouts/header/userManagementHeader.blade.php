@@ -3,9 +3,9 @@
 
     @if (count($workspaces) == 1)
         <li class="nav-item mr-5 px-2">
-                            <span class="nav-link" id="bd-versions" aria-haspopup="true" aria-expanded="false">
-                                 auth()->user()->currentWorkspace->name
-                            </span>
+            <span class="nav-link" id="bd-versions" aria-haspopup="true" aria-expanded="false">
+                 {{ auth()->user()->currentWorkspace->name }}
+            </span>
         </li>
     @elseif (count($workspaces) > 1 && auth()->user()->currentWorkspace)
         <li class="nav-item dropdown mr-4 px-2 workspace-select">
@@ -17,7 +17,7 @@
 
             <div class="dropdown-menu" aria-labelledby="bd-versions">
                 @foreach($workspaces as $workspace)
-                    <a class="dropdown-item px-3" href="{{ route('sendportal.workspaces.switch', $workspace->id) }}">
+                    <a class="dropdown-item px-3" href="{{ route('workspaces.switch', $workspace->id) }}">
                         <i class="fas fa-circle mr-2 {{ auth()->user()->currentWorkspace->id == $workspace->id ? 'color-purple-500' : 'color-gray-300' }}"></i>{{ $workspace->name }}
                     </a>
                 @endforeach
@@ -37,9 +37,9 @@
         </a>
 
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-versions">
-            <a class="dropdown-item px-3" href="{{ route('sendportal.profile.show') }}"><i
+            <a class="dropdown-item px-3" href="{{ route('profile.show') }}"><i
                         class="fas fa-user mr-2 color-gray-300"></i>{{ __('My Profile') }}</a>
-            <a class="dropdown-item px-3" href="{{ route('sendportal.workspaces.index') }}"><i
+            <a class="dropdown-item px-3" href="{{ route('workspaces.index') }}"><i
                         class="fas fa-layer-group mr-2 color-gray-300"></i>{{ __('Workspaces') }}</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item px-3" href="{{ route('logout') }}"

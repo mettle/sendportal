@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sendportal\Base\Http\Controllers\Auth;
+namespace App\Http\Controllers\Auth;
 
 use Illuminate\Contracts\Validation\Validator as ValidatorContract;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -11,13 +11,13 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use Sendportal\Base\Http\Controllers\Controller;
-use Sendportal\Base\Models\Workspace;
-use Sendportal\Base\Models\User;
-use Sendportal\Base\Rules\ValidInvitation;
-use Sendportal\Base\Services\Workspaces\AcceptInvitation;
-use Sendportal\Base\Services\Workspaces\CreateWorkspace;
-use Sendportal\Base\Traits\ChecksInvitations;
+use App\Http\Controllers\Controller;
+use App\Workspace;
+use App\User;
+use App\Rules\ValidInvitation;
+use App\Services\Workspaces\AcceptInvitation;
+use App\Services\Workspaces\CreateWorkspace;
+use App\Traits\ChecksInvitations;
 
 class RegisterController extends Controller
 {
@@ -50,7 +50,7 @@ class RegisterController extends Controller
                 ->with('error', __('The invitation is no longer valid.'));
         }
 
-        return view('sendportal::auth.register');
+        return view('auth.register');
     }
 
     protected function validator(array $data): ValidatorContract

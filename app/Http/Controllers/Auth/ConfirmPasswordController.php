@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Sendportal\Base\Http\Controllers\Auth;
+namespace App\Http\Controllers\Auth;
 
 use Illuminate\Foundation\Auth\ConfirmsPasswords;
-use Sendportal\Base\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 
 class ConfirmPasswordController extends Controller
 {

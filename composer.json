@@ -11,7 +11,7 @@
         "laravel/framework": "^7.0",
         "laravel/horizon": "^4.3",
         "laravel/tinker": "^2.0",
-        "mettle/sendportal-core": "dev-master"
+        "mettle/sendportal-core": "dev-feature/package-support"
     },
     "require-dev": {
         "roave/security-advisories": "dev-master",

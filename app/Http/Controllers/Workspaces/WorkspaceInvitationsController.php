@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Sendportal\Base\Http\Controllers\Workspaces;
+namespace App\Http\Controllers\Workspaces;
 
 use Exception;
 use Illuminate\Http\RedirectResponse;
-use Sendportal\Base\Http\Controllers\Controller;
-use Sendportal\Base\Http\Middleware\OwnsCurrentWorkspace;
-use Sendportal\Base\Http\Requests\Workspaces\WorkspaceInvitationStoreRequest;
-use Sendportal\Base\Models\Invitation;
-use Sendportal\Base\Services\Workspaces\SendInvitation;
+use App\Http\Controllers\Controller;
+use App\Http\Middleware\OwnsCurrentWorkspace;
+use App\Http\Requests\Workspaces\WorkspaceInvitationStoreRequest;
+use App\Invitation;
+use App\Services\Workspaces\SendInvitation;
 
 class WorkspaceInvitationsController extends Controller
 {
@@ -33,7 +33,7 @@ class WorkspaceInvitationsController extends Controller
 
         $this->sendInvitation->handle($workspace, $request->email);
 
-        return redirect()->route('sendportal.users.index');
+        return redirect()->route('users.index');
     }
 
     /**
@@ -43,6 +43,6 @@ class WorkspaceInvitationsController extends Controller
     {
         $invitation->delete();
 
-        return redirect()->route('sendportal.users.index');
+        return redirect()->route('users.index');
     }
 }

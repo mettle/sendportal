@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Sendportal\Base\Http\Controllers\Auth;
+namespace App\Http\Controllers\Auth;
 
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
-use Sendportal\Base\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 
 class ForgotPasswordController extends Controller
 {
@@ -24,6 +24,6 @@ class ForgotPasswordController extends Controller
 
     public function showLinkRequestForm()
     {
-        return view('sendportal::auth.passwords.email');
+        return view('auth.passwords.email');
     }
 }

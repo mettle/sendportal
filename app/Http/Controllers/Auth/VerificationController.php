@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Sendportal\Base\Http\Controllers\Auth;
+namespace App\Http\Controllers\Auth;
 
 use Illuminate\Foundation\Auth\VerifiesEmails;
 use Illuminate\Http\Request;
-use Sendportal\Base\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 
 class VerificationController extends Controller
 {
@@ -23,7 +23,7 @@ class VerificationController extends Controller
     {
         return $request->user()->hasVerifiedEmail()
             ? redirect($this->redirectPath())
-            : view('sendportal::auth.verify');
+            : view('auth.verify');
     }
 
     protected function redirectTo(): string

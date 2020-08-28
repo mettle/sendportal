@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Sendportal\Base\Http\Controllers\Workspaces;
+namespace App\Http\Controllers\Workspaces;
 
+use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Contracts\View\View as ViewContract;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Sendportal\Base\Http\Controllers\Controller;
 use App\Http\Middleware\OwnsRequestedWorkspace;
-use Sendportal\Base\Http\Requests\Workspaces\WorkspaceStoreRequest;
-use Sendportal\Base\Http\Requests\Workspaces\WorkspaceUpdateRequest;
-use Sendportal\Base\Models\Workspace;
-use Sendportal\Base\Repositories\WorkspacesRepository;
-use Sendportal\Base\Services\Workspaces\CreateWorkspace;
+use App\Http\Requests\Workspaces\WorkspaceStoreRequest;
+use App\Http\Requests\Workspaces\WorkspaceUpdateRequest;
+use App\Workspace;
+use App\Repositories\WorkspacesRepository;
+use App\Services\Workspaces\CreateWorkspace;
 
 class WorkspacesController extends Controller
 {
@@ -39,7 +39,7 @@ class WorkspacesController extends Controller
     {
         $user = $request->user()->load('workspaces', 'invitations.workspace');
 
-        return view('sendportal::workspaces.index', [
+        return view('workspaces.index', [
             'workspaces' => $user->workspaces,
             'invitations' => $user->invitations,
         ]);
@@ -52,12 +52,12 @@ class WorkspacesController extends Controller
     {
         $this->createWorkspace->handle($request->user(), $request->get('name'), Workspace::ROLE_OWNER);
 
-        return redirect()->route('sendportal.workspaces.index');
+        return redirect()->route('workspaces.index');
     }
 
     public function edit(Workspace $workspace): ViewContract
     {
-        return view('sendportal::workspaces.edit', [
+        return view('workspaces.edit', [
             'workspace' => $workspace
         ]);
     }
@@ -69,6 +69,6 @@ class WorkspacesController extends Controller
     {
         $this->workspaces->update($workspace->id, ['name' => $request->get('workspace_name')]);
 
-        return redirect()->route('sendportal.workspaces.index');
+        return redirect()->route('workspaces.index');
     }
 }
