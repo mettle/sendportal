@@ -1,6 +1,6 @@
-@extends('sendportal::layouts.app')
+@extends('sendportal::layouts.base')
 
-@section('content')
+@section('htmlBody')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">

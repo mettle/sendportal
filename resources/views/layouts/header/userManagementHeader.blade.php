@@ -1,3 +1,4 @@
+@auth()
 <ul class="navbar-nav flex-row ml-md-auto d-md-flex">
     @php $workspaces = auth()->user()->workspaces @endphp
 
@@ -52,3 +53,4 @@
 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
     {{ csrf_field() }}
 </form>
+@endauth
