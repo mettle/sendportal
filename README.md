@@ -6,3 +6,8 @@ Open-source self-hosted email marketing. Manage your own newsletters at a fracti
 
 - [Website](https://sendportal.io)
 - [Documentation](https://sendportal.io/docs)
+
+
+## Code
+
+This repo is a wrapper for the main SendPortal codebase. See https://github.com/mettle/sendportal-core for more information.
