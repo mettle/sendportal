@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Workspaces;
 
-use Sendportal\Base\Models\Workspace;
-use Sendportal\Base\Services\Workspaces\AddWorkspaceMember;
+use App\Workspace;
+use App\Services\Workspaces\AddWorkspaceMember;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -25,7 +25,7 @@ class SwitchWorkspaceTest extends TestCase
 
         // when
         $this->loginUser($user);
-        $response = $this->get(route('sendportal.workspaces.switch', $secondWorkspace->id));
+        $response = $this->get(route('workspaces.switch', $secondWorkspace->id));
 
         // then
         $response->assertRedirect(route('sendportal.dashboard'));
@@ -43,12 +43,12 @@ class SwitchWorkspaceTest extends TestCase
 
         // when
         $this->loginUser($user);
-        $response = $this->get(route('sendportal.workspaces.switch', $secondWorkspace->id));
+        $response = $this->get(route('workspaces.switch', $secondWorkspace->id));
 
         // then
         $response->assertStatus(404);
 
-        $this->assertEquals(Sendportal::currentWorkspaceId(), $user->currentWorkspace()->id);
+        $this->assertEquals($workspace->id, $user->currentWorkspace()->id);
     }
 
     /** @test */
@@ -61,7 +61,7 @@ class SwitchWorkspaceTest extends TestCase
         (new AddWorkspaceMember())->handle($secondWorkspace, $user, Workspace::ROLE_OWNER);
 
         // when
-        $response = $this->get(route('sendportal.workspaces.switch', $secondWorkspace->id));
+        $response = $this->get(route('workspaces.switch', $secondWorkspace->id));
 
         // then
         $response->assertRedirect(route('login'));

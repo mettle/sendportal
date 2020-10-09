@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Workspaces;
 
-use Sendportal\Base\Models\Workspace;
-use Sendportal\Base\Models\User;
-use Sendportal\Base\Services\Workspaces\AddWorkspaceMember;
+use App\Workspace;
+use App\User;
+use App\Services\Workspaces\AddWorkspaceMember;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -30,7 +30,7 @@ class WorkspacesControllerTest extends TestCase
 
         // when
         $this->loginUser($user);
-        $response = $this->get(route('sendportal.workspaces.index'));
+        $response = $this->get(route('workspaces.index'));
 
         // then
         $response->assertOk();
@@ -48,12 +48,12 @@ class WorkspacesControllerTest extends TestCase
 
         // when
         $this->loginUser($user);
-        $response = $this->post(route('sendportal.workspaces.store'), [
+        $response = $this->post(route('workspaces.store'), [
             'name' => $newWorkspaceName
         ]);
 
         // then
-        $response->assertRedirect(route('sendportal.workspaces.index'));
+        $response->assertRedirect(route('workspaces.index'));
 
         $this->assertDatabaseHas('workspaces', [
             'name' => $newWorkspaceName,

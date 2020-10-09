@@ -6,9 +6,9 @@ namespace Tests\Feature\Invitations;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Sendportal\Base\Models\Invitation;
-use Sendportal\Base\Models\User;
-use Sendportal\Base\Models\Workspace;
+use App\Invitation;
+use App\User;
+use App\Workspace;
 use Tests\TestCase;
 
 class NewUserInvitationTest extends TestCase
@@ -32,7 +32,7 @@ class NewUserInvitationTest extends TestCase
         // given
         $workspace = factory(Workspace::class)->create();
         $invitation = factory(Invitation::class)->create([
-            'workspace_id' => Sendportal::currentWorkspaceId()
+            'workspace_id' => $workspace->id
         ]);
 
         $postData = [

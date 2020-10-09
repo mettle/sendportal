@@ -15,9 +15,9 @@ class WorkspaceUserControllerTest extends TestCase
      * @test
      * @group workspace_user_test
      */
-    function an_unauthenticated_user_cannot_view_the_workspace_user_index()
+    public function an_unauthenticated_user_cannot_view_the_workspace_user_index()
     {
-        $response = $this->get(route('sendportal.users.index'));
+        $response = $this->get(route('users.index'));
 
         $this->assertLoginRedirect($response);
     }
@@ -27,11 +27,11 @@ class WorkspaceUserControllerTest extends TestCase
      * @test
      * @group workspace_user_test
      */
-    function users_cannot_view_workspace_users_for_a_workspace_they_do_not_own()
+    public function users_cannot_view_workspace_users_for_a_workspace_they_do_not_own()
     {
         $this->createUserAndLogin(['workspace-member']);
 
-        $response = $this->get(route('sendportal.users.index'));
+        $response = $this->get(route('users.index'));
 
         $response->assertStatus(404);
     }
@@ -40,12 +40,12 @@ class WorkspaceUserControllerTest extends TestCase
      * @test
      * @group workspace_user_test
      */
-    function users_can_view_workspace_users_for_a_workspace_they_do_own()
+    public function users_can_view_workspace_users_for_a_workspace_they_do_own()
     {
         $user = $this->createUserWithWorkspace();
 
-        $this;
-        $response = $this->get(route('sendportal.users.index'));
+        $this->actingAs($user);
+        $response = $this->get(route('users.index'));
 
         $response->assertOk();
         $response->assertSee($user->name);
@@ -55,7 +55,7 @@ class WorkspaceUserControllerTest extends TestCase
      * @test
      * @group workspace_user_test
      */
-    function workspace_owners_can_remove_users_from_their_workspace()
+    public function workspace_owners_can_remove_users_from_their_workspace()
     {
         $user = $this->createUserWithWorkspace();
         $workspace = $user->currentWorkspace();
@@ -64,8 +64,8 @@ class WorkspaceUserControllerTest extends TestCase
 
         $this->assertTrue($otherUser->onWorkspace($workspace));
 
-        $this;
-        $this->delete(route('sendportal.users.destroy', $otherUser->id));
+        $this->actingAs($user);
+        $this->delete(route('users.destroy', $otherUser->id));
 
         $this->assertFalse($otherUser->fresh()->onWorkspace($workspace));
     }
@@ -74,12 +74,12 @@ class WorkspaceUserControllerTest extends TestCase
      * @test
      * @group workspace_user_test
      */
-    function workspace_owners_cannot_remove_themselves_from_their_workspace()
+    public function workspace_owners_cannot_remove_themselves_from_their_workspace()
     {
         [$workspace, $user] = $this->createUserAndWorkspace();
 
-        $this;
-        $response = $this->delete(route('sendportal.users.destroy', $user->id));
+        $this->actingAs($user);
+        $response = $this->delete(route('users.destroy', $user->id));
 
         $response->assertRedirect();
 
@@ -90,7 +90,7 @@ class WorkspaceUserControllerTest extends TestCase
      * @test
      * @group workspace_user_test
      */
-    function only_workspace_owners_can_remove_users_from_a_workspace()
+    public function only_workspace_owners_can_remove_users_from_a_workspace()
     {
         $user = $this->createUserAndLogin(['workspace-member']);
 
@@ -98,9 +98,8 @@ class WorkspaceUserControllerTest extends TestCase
 
         $otherUser = $this->createWorkspaceUser($workspace);
 
-        $response = $this->delete(route('sendportal.users.destroy', $otherUser->id));
+        $response = $this->delete(route('users.destroy', $otherUser->id));
 
         $response->assertStatus(404);
     }
-
 }

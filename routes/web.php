@@ -36,7 +36,7 @@ Route::middleware('auth')->namespace('Auth')->group(
 
 // Workspace User Management.
 Route::namespace('Workspaces')
-    ->middleware(OwnsCurrentWorkspace::class)
+    ->middleware(['auth', 'verified', OwnsCurrentWorkspace::class])
     ->name('users.')
     ->prefix('users')
     ->group(
