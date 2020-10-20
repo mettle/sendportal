@@ -14,6 +14,8 @@ Auth::routes(
     ]
 );
 
+Route::get('setup', 'SetupController@index')->name('setup');
+
 // Auth.
 Route::middleware('auth')->namespace('Auth')->group(
     static function (Router $authRouter)
