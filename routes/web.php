@@ -19,7 +19,7 @@ Route::middleware('auth')->namespace('Auth')->group(
     static function (Router $authRouter)
     {
         // Logout.
-        $authRouter->get('logout', 'LoginController@logout')->name('sendportal.logout');
+        $authRouter->get('logout', 'LoginController@logout')->name('logout');
 
         // Profile.
         $authRouter->middleware('verified')->name('profile.')->prefix('profile')->group(
