@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Http\Livewire\Setup;
 use Illuminate\Support\ServiceProvider;
+use Livewire\Livewire;
 use Sendportal\Base\Facades\Sendportal;
 
 class AppServiceProvider extends ServiceProvider
@@ -35,5 +37,7 @@ class AppServiceProvider extends ServiceProvider
         Sendportal::headerHtmlContentResolver(function() {
             return view('layouts.header.userManagementHeader')->render();
         });
+
+        Livewire::component('setup', Setup::class);
     }
 }

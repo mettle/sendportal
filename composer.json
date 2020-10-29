@@ -11,6 +11,7 @@
         "laravel/framework": "^7.0",
         "laravel/horizon": "^4.3",
         "laravel/tinker": "^2.0",
+        "livewire/livewire": "^2.3",
         "mettle/sendportal-core": "dev-feature/package-support"
     },
     "require-dev": {
