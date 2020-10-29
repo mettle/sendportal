@@ -8,9 +8,9 @@ use App\Http\Middleware\OwnsCurrentWorkspace;
 
 Auth::routes(
     [
-        'verify' => config('sendportal.auth.register', false),
-        'register' => config('sendportal.auth.register', false),
-        'reset' => config('sendportal.auth.password_reset'),
+        'verify' => config('sendportal-host.auth.register', false),
+        'register' => config('sendportal-host.auth.register', false),
+        'reset' => config('sendportal-host.auth.password_reset'),
     ]
 );
 

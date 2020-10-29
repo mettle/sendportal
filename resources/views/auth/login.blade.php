@@ -65,7 +65,7 @@
                                     {{ __('Login') }}
                                 </button>
 
-                                @if(config('sendportal.auth.password_reset'))
+                                @if(config('sendportal-host.auth.password_reset'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
@@ -75,7 +75,7 @@
                     </form>
                 </div>
 
-                @if(config('sendportal.auth.register'))
+                @if(config('sendportal-host.auth.register'))
                     <hr>
                     <p class="text-center">{{ __('Don\'t have an account?') }} <a href="{{ route('register') }}">{{ __('Register') }}</a></p>
                 @endif

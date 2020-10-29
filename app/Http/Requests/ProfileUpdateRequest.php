@@ -35,7 +35,7 @@ class ProfileUpdateRequest extends FormRequest
             ],
             'locale' => [
                 'required',
-                Rule::in(array_keys(config()->get('sendportal.locale.supported')))
+                Rule::in(array_keys(config()->get('sendportal-host.locale.supported')))
             ]
         ];
     }

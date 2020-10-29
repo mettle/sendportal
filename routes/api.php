@@ -6,14 +6,14 @@ use Sendportal\Base\Facades\Sendportal;
 
 Route::middleware([
     'auth:api',
-    config('sendportal.throttle_middleware'),
+    config('sendportal-host.throttle_middleware'),
 ])->name('sendportal.api.')->namespace('Api')->group(static function (Router $router) {
     $router->apiResource('workspaces', 'WorkspacesController')->only('index');
 });
 
 Route::middleware([
     'auth:api',
-    config('sendportal.throttle_middleware'),
+    config('sendportal-host.throttle_middleware'),
     \App\Http\Middleware\VerifyUserOnWorkspace::class
 ])->group(function() {
 

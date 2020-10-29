@@ -38,7 +38,7 @@
 
                             <div class="col-md-6">
                                 <select name="locale" id="locale" class="form-control">
-                                    @foreach(config()->get('sendportal.locale.supported') as $key => $locale)
+                                    @foreach(config()->get('sendportal-host.locale.supported') as $key => $locale)
                                         <option value="{{ $key }}" {{ auth()->user()->locale === $key ? 'selected="selected"' : '' }}">
                                             {{ $locale['name'] }}
                                         </option>

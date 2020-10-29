@@ -102,7 +102,7 @@
                     </div>
                     <div class="card-body">
 
-                        @if(config('sendportal.auth.register'))
+                        @if(config('sendportal-host.auth.register'))
 
                             <form action="{{ route('users.invitations.store') }}" method="post">
 
