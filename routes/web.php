@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Sendportal\Base\Facades\Sendportal;
 use App\Http\Middleware\OwnsCurrentWorkspace;
+use App\Http\Middleware\RequireWorkspace;
 
 Auth::routes(
     [
@@ -46,7 +47,7 @@ Route::middleware('auth')->namespace('Auth')->group(
 
 // Workspace User Management.
 Route::namespace('Workspaces')
-    ->middleware(['auth', 'verified', OwnsCurrentWorkspace::class])
+    ->middleware(['auth', 'verified', RequireWorkspace::class, OwnsCurrentWorkspace::class])
     ->name('users.')
     ->prefix('users')
     ->group(
@@ -72,7 +73,8 @@ Route::namespace('Workspaces')
 Route::namespace('Workspaces')->middleware(
     [
         'auth',
-        'verified'
+        'verified',
+        RequireWorkspace::class
     ]
 )->group(
     static function (Router $workspaceRouter)
@@ -97,7 +99,7 @@ Route::namespace('Workspaces')->middleware(
     }
 );
 
-Route::middleware(['auth', 'verified'])->group(
+Route::middleware(['auth', 'verified', RequireWorkspace::class])->group(
     static function ()
     {
         Sendportal::webRoutes();

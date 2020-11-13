@@ -7,14 +7,20 @@ use Sendportal\Base\Facades\Sendportal;
 Route::middleware([
     'auth:api',
     config('sendportal-host.throttle_middleware'),
+    /**
+     *
+     *
+     * @todo should we require a workspace id here?
+     *
+     *
+     */
 ])->name('sendportal.api.')->namespace('Api')->group(static function (Router $router) {
     $router->apiResource('workspaces', 'WorkspacesController')->only('index');
 });
 
 Route::middleware([
-    'auth:api',
     config('sendportal-host.throttle_middleware'),
-    \App\Http\Middleware\VerifyUserOnWorkspace::class
+    \App\Http\Middleware\RequireWorkspace::class
 ])->group(function() {
 
     Sendportal::apiRoutes();

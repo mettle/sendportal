@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\ApiToken;
 use App\Http\Livewire\Setup;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
@@ -20,20 +21,17 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * Bootstrap any application services.
-     *
-     * @return void
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function boot()
     {
         Sendportal::currentWorkspaceIdResolver(function() {
-
             if (auth()->user()) {
                 return auth()->user()->currentWorkspaceId();
             }
 
             if ($apiToken = request()->bearerToken()) {
-         //       return
+                return ApiToken::resolveWorkspaceId($apiToken);
             }
         });
 

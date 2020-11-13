@@ -18,4 +18,22 @@ use Sendportal\Base\Models\BaseModel;
 class ApiToken extends BaseModel
 {
     protected $guarded = [];
+
+    /**
+     * @var array
+     */
+    protected $casts = [
+        'workspace_id' => 'integer'
+    ];
+
+    /**
+     * @param $rawHeaderValue
+     * @return int|null
+     */
+    public static function resolveWorkspaceId($rawHeaderValue): ?int
+    {
+        $apiTokenInstance = self::where('api_token', $rawHeaderValue)->first();
+
+        return $apiTokenInstance->workspace_id ?? null;
+    }
 }
