@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ApiTokens\ApiTokenStoreRequest;
 use App\Repositories\ApiTokenRepository;
 use Exception;
 use Illuminate\Http\RedirectResponse;
@@ -34,11 +35,16 @@ class ApiTokenController extends Controller
     /**
      * @throws Exception
      */
-    public function store(): RedirectResponse
+    public function store(ApiTokenStoreRequest $request): RedirectResponse
     {
+        $input = $request->validated();
+
         $newToken = Str::random(32);
 
-        $this->apiTokensRepo->store(auth()->user()->currentWorkspaceId(), ['api_token' => $newToken]);
+        $this->apiTokensRepo->store(
+            auth()->user()->currentWorkspaceId(),
+            ['api_token' => $newToken, 'description' => $input['description']]
+        );
 
         return redirect()
             ->route('api-tokens.index');

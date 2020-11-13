@@ -5,20 +5,27 @@
     <div class="row">
         <div class="col-lg-8 offset-lg-2">
             <div class="card">
+
                 <div class="card-header card-header-accent">
                     <div class="card-header-inner">
                         {{ __('API Tokens') }}
                     </div>
                 </div>
+
                 @if ($tokens->isEmpty())
+
                     <div class="card-body">
                         <p>No API tokens have been generated.</p>
                     </div>
+
                 @else
+
                     <table class="table table-striped">
                         <thead>
                         <tr>
                             <th>Token</th>
+                            <th>Description</th>
+                            <th>Created At</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -26,6 +33,8 @@
                         @foreach ($tokens as $token)
                             <tr>
                                 <td>{{ $token->api_token }}</td>
+                                <td>{{ $token->description }}</td>
+                                <td>{{ $token->created_at }}</td>
                                 <td>
                                     <form action="{{ route('api-tokens.destroy', $token->id) }}" method="POST">
                                         @csrf
@@ -39,14 +48,33 @@
                         @endforeach
                         </tbody>
                     </table>
+
                 @endif
 
-                <div class="card-footer">
-                    <form action="{{ route('api-tokens.store') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn btn-primary">Add Token</button>
-                    </form>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-header">
+                    {{ __('Add New Token') }}
                 </div>
+                <div class="card-body">
+
+                    <form action="{{ route('api-tokens.store') }}" method="post">
+
+                        @csrf
+                        <div class="form-group row">
+                            <label for="token-description" class="col-sm-2">{{ __('Description') }}</label>
+
+                            <div class="col-sm-6">
+                                <input type="text" id="token-description" class="form-control" name="description" placeholder="Optional description for your API token…">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="offset-sm-2 col-sm-10">
+                                <input type="submit" class="btn btn-md btn-primary" value="{{ __('Add Token') }}">
+                            </div>
+                        </div>
+                    </form>
 
                 </div>
             </div>
