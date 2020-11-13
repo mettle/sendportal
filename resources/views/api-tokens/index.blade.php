@@ -11,9 +11,9 @@
                     </div>
                 </div>
                 @if ($tokens->isEmpty())
-                <div class="card-body">
-                    <p>No API tokens have been generated.</p>
-                </div>
+                    <div class="card-body">
+                        <p>No API tokens have been generated.</p>
+                    </div>
                 @else
                     <table class="table table-striped">
                         <thead>
