@@ -63,7 +63,7 @@
     "repositories": [
         {
             "type": "path",
-            "url": "../sendportal-core",
+            "url": "../sendportal_base",
             "options": {
                 "symlink": true
             }

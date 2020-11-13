@@ -40,8 +40,14 @@
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-versions">
             <a class="dropdown-item px-3" href="{{ route('profile.show') }}"><i
                         class="fas fa-user mr-2 color-gray-300"></i>{{ __('My Profile') }}</a>
+
             <a class="dropdown-item px-3" href="{{ route('workspaces.index') }}"><i
                         class="fas fa-layer-group mr-2 color-gray-300"></i>{{ __('Workspaces') }}</a>
+
+            <a class="dropdown-item px-3" href="{{ route('api-tokens.index') }}">
+                <i class="fas fa-layer-group mr-2 color-gray-300"></i> {{ __('API Tokens') }}
+            </a>
+
             <div class="dropdown-divider"></div>
             <a class="dropdown-item px-3" href="{{ route('logout') }}"
                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
