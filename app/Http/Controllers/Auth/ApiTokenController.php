@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\ApiTokenRepository;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
@@ -28,7 +29,7 @@ class ApiTokenController extends Controller
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function store(): RedirectResponse
     {
@@ -41,7 +42,7 @@ class ApiTokenController extends Controller
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy(int $tokenId): RedirectResponse
     {
