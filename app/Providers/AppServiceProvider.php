@@ -27,7 +27,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Sendportal::currentWorkspaceIdResolver(function() {
-            return auth()->user()->currentWorkspaceId();
+
+            if (auth()->user()) {
+                return auth()->user()->currentWorkspaceId();
+            }
+
+            if ($apiToken = request()->bearerToken()) {
+         //       return
+            }
         });
 
         Sendportal::siderbarHtmlContentResolver(function() {
