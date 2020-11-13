@@ -21,9 +21,12 @@ class ApiTokenController extends Controller
         $this->apiTokensRepo = $apiTokensRepo;
     }
 
+    /**
+     * @throws Exception
+     */
     public function index(): View
     {
-        $tokens = $this->apiTokensRepo->all();
+        $tokens = $this->apiTokensRepo->all(auth()->user()->currentWorkspaceId());
 
         return view('api-tokens.index', compact('tokens'));
     }
@@ -35,7 +38,7 @@ class ApiTokenController extends Controller
     {
         $newToken = Str::random(32);
 
-        $this->apiTokensRepo->store(['api_token' => $newToken, 'workspace_id' => 1]);
+        $this->apiTokensRepo->store(auth()->user()->currentWorkspaceId(), ['api_token' => $newToken]);
 
         return redirect()
             ->route('api-tokens.index');
@@ -46,7 +49,7 @@ class ApiTokenController extends Controller
      */
     public function destroy(int $tokenId): RedirectResponse
     {
-        $this->apiTokensRepo->destroy($tokenId);
+        $this->apiTokensRepo->destroy(auth()->user()->currentWorkspaceId(), $tokenId);
 
         return redirect()->back();
     }
