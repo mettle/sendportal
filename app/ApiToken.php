@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App;
 
-use Illuminate\Support\Facades\Crypt;
 use Sendportal\Base\Models\BaseModel;
 
 class ApiToken extends BaseModel
@@ -14,11 +13,17 @@ class ApiToken extends BaseModel
      * @var array
      */
     protected $casts = [
-        'api_token' => ['encrypted']
+        'workspace_id' => 'integer'
     ];
 
-    public static function resolveWorkspaceId($rawHeaderValue)
+    /**
+     * @param $rawHeaderValue
+     * @return int|null
+     */
+    public static function resolveWorkspaceId($rawHeaderValue):?int
     {
-    //    Crypt::dec
+        $apiTokenInstance = self::where('api_token', $rawHeaderValue)->first();
+
+        return $apiTokenInstance->workspace_id ?? null;
     }
 }
