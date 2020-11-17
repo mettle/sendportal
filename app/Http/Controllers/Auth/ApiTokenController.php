@@ -11,6 +11,7 @@ use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
+use Sendportal\Base\Facades\Sendportal;
 
 class ApiTokenController extends Controller
 {
@@ -27,7 +28,7 @@ class ApiTokenController extends Controller
      */
     public function index(): View
     {
-        $tokens = $this->apiTokensRepo->all(auth()->user()->currentWorkspaceId());
+        $tokens = $this->apiTokensRepo->all(Sendportal::currentWorkspaceId());
 
         return view('api-tokens.index', compact('tokens'));
     }
@@ -42,7 +43,7 @@ class ApiTokenController extends Controller
         $newToken = Str::random(32);
 
         $this->apiTokensRepo->store(
-            auth()->user()->currentWorkspaceId(),
+            Sendportal::currentWorkspaceId(),
             ['api_token' => $newToken, 'description' => $input['description']]
         );
 
@@ -55,7 +56,7 @@ class ApiTokenController extends Controller
      */
     public function destroy(int $tokenId): RedirectResponse
     {
-        $this->apiTokensRepo->destroy(auth()->user()->currentWorkspaceId(), $tokenId);
+        $this->apiTokensRepo->destroy(Sendportal::currentWorkspaceId(), $tokenId);
 
         return redirect()->back();
     }
