@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\ApiTokenController;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,13 @@ Route::middleware('auth')->namespace('Auth')->group(
                 $profileRouter->put('/', 'ProfileController@update')->name('update');
             }
         );
+
+        // API Tokens.
+        $authRouter->middleware('verified')->name('api-tokens.')->prefix('api-tokens')->group(static function (Router $apiTokenRouter) {
+            $apiTokenRouter->get('/', [ApiTokenController::class, 'index'])->name('index');
+            $apiTokenRouter->post('/', [ApiTokenController::class, 'store'])->name('store');
+            $apiTokenRouter->delete('{tokenid}', [ApiTokenController::class, 'destroy'])->name('destroy');
+        });
     }
 );
 
