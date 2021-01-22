@@ -66,6 +66,7 @@ class RegisterController extends Controller
     protected function create(array $data): User
     {
         return DB::transaction(function () use ($data) {
+            /** @var User $user */
             $user = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
