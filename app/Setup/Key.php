@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Setup;
 
 use Illuminate\Support\Facades\Artisan;
 
 class Key implements StepInterface
 {
-    const VIEW = 'setup.steps.key';
+    public const VIEW = 'setup.steps.key';
 
     /**
      * {@inheritDoc}

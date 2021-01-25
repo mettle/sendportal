@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
-use App\Workspace;
-use App\User;
+use App\Models\Workspace;
+use App\Models\User;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Sendportal\Base\Repositories\BaseEloquentRepository;

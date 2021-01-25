@@ -9,7 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Middleware\OwnsCurrentWorkspace;
 use App\Http\Requests\Workspaces\WorkspaceInvitationStoreRequest;
-use App\Invitation;
+use App\Models\Invitation;
 use App\Services\Workspaces\SendInvitation;
 
 class WorkspaceInvitationsController extends Controller

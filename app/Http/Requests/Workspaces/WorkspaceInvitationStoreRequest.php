@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Workspaces;
 
-use App\Workspace;
+use App\Models\Workspace;
 use Illuminate\Contracts\Validation\Validator as ValidatorContract;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Validator;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature\Setup;
 
 use App\Http\Livewire\Setup;
@@ -25,15 +27,19 @@ class SetupTest extends TestCase
     {
         $setup = Livewire::test(Setup::class);
 
-        $this->assertCount(6, $setup->get('steps'));
+        self::assertCount(6, $setup->get('steps'));
     }
 
     /** @test */
     public function the_setup_component_should_check_the_first_step_when_mounted_and_stop_if_its_false()
     {
-        $this->mock(Env::class, function ($mock) {
-            $mock->shouldReceive('check')->once()->andReturn(false);
-        });
+        $this->mock(
+            Env::class,
+            function ($mock)
+            {
+                $mock->shouldReceive('check')->once()->andReturn(false);
+            }
+        );
 
         $setup = Livewire::test(Setup::class);
 
@@ -51,7 +57,7 @@ class SetupTest extends TestCase
 
         $step = $setup->get('steps')[$setup->get('active')];
 
-        $this->assertEquals(Admin::class, $step['handler']);
-        $this->assertEquals(false, $step['completed']);
+        self::assertEquals(Admin::class, $step['handler']);
+        self::assertEquals(false, $step['completed']);
     }
 }

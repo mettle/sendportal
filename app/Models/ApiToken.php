@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App;
+namespace App\Models;
 
 use Carbon\Carbon;
+use Database\Factories\ApiTokenFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Sendportal\Base\Models\BaseModel;
 
 /**
@@ -14,9 +16,14 @@ use Sendportal\Base\Models\BaseModel;
  * @property int $workspace_id
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ *
+ * @method static ApiTokenFactory factory
  */
 class ApiToken extends BaseModel
 {
+    use HasFactory;
+
+    /** @var array */
     protected $guarded = [];
 
     /**

@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Providers;
 
-use App\ApiToken;
+use App\Models\ApiToken;
 use App\Http\Livewire\Setup;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
@@ -33,6 +35,8 @@ class AppServiceProvider extends ServiceProvider
             if ($apiToken = request()->bearerToken()) {
                 return ApiToken::resolveWorkspaceId($apiToken);
             }
+
+            return null;
         });
 
         Sendportal::siderbarHtmlContentResolver(function() {

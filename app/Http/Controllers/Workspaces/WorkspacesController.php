@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use App\Http\Middleware\OwnsRequestedWorkspace;
 use App\Http\Requests\Workspaces\WorkspaceStoreRequest;
 use App\Http\Requests\Workspaces\WorkspaceUpdateRequest;
-use App\Workspace;
+use App\Models\Workspace;
 use App\Repositories\WorkspacesRepository;
 use App\Services\Workspaces\CreateWorkspace;
 
@@ -65,7 +65,7 @@ class WorkspacesController extends Controller
     /**
      * @throws Exception
      */
-    public function update(WorkspaceUpdateRequest $request, Workspace $workspace)
+    public function update(WorkspaceUpdateRequest $request, Workspace $workspace): RedirectResponse
     {
         $this->workspaces->update($workspace->id, ['name' => $request->get('workspace_name')]);
 

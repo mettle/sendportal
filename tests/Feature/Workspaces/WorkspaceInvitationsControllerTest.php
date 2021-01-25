@@ -7,9 +7,9 @@ namespace Tests\Feature\Workspaces;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Mail;
-use App\Invitation;
-use App\Workspace;
-use App\User;
+use App\Models\Invitation;
+use App\Models\Workspace;
+use App\Models\User;
 use App\Services\Workspaces\AddWorkspaceMember;
 use Tests\TestCase;
 
@@ -37,11 +37,14 @@ class WorkspaceInvitationsControllerTest extends TestCase
         // then
         $response->assertRedirect(route('users.index'));
 
-        $this->assertDatabaseHas('invitations', [
-            'workspace_id' => $workspace->id,
-            'email' => $email,
-            'user_id' => null
-        ]);
+        $this->assertDatabaseHas(
+            'invitations',
+            [
+                'workspace_id' => $workspace->id,
+                'email' => $email,
+                'user_id' => null
+            ]
+        );
     }
 
     /** @test */
@@ -50,7 +53,7 @@ class WorkspaceInvitationsControllerTest extends TestCase
         // given
         [$workspace, $user] = $this->createUserAndWorkspace();
 
-        $existingInviteUser = factory(User::class)->create();
+        $existingInviteUser = User::factory()->create();
 
         $postData = [
             'email' => $existingInviteUser->email
@@ -63,19 +66,22 @@ class WorkspaceInvitationsControllerTest extends TestCase
         // then
         $response->assertRedirect(route('users.index'));
 
-        $this->assertDatabaseHas('invitations', [
-            'workspace_id' => $workspace->id,
-            'email' => $existingInviteUser->email,
-            'user_id' => $existingInviteUser->id
-        ]);
+        $this->assertDatabaseHas(
+            'invitations',
+            [
+                'workspace_id' => $workspace->id,
+                'email' => $existingInviteUser->email,
+                'user_id' => $existingInviteUser->id
+            ]
+        );
     }
 
     /** @test */
     public function non_owners_cannot_invite_new_members()
     {
         // given
-        $user = factory(User::class)->create();
-        $workspace = factory(Workspace::class)->create();
+        $user = User::factory()->create();
+        $workspace = Workspace::factory()->create();
 
         (new AddWorkspaceMember())->handle($workspace, $user, Workspace::ROLE_MEMBER);
 
@@ -92,10 +98,13 @@ class WorkspaceInvitationsControllerTest extends TestCase
         // then
         $response->assertStatus(404);
 
-        $this->assertDatabaseMissing('invitations', [
-            'workspace_id' => $workspace->id,
-            'email' => $email
-        ]);
+        $this->assertDatabaseMissing(
+            'invitations',
+            [
+                'workspace_id' => $workspace->id,
+                'email' => $email
+            ]
+        );
     }
 
     /** @test */
@@ -104,9 +113,11 @@ class WorkspaceInvitationsControllerTest extends TestCase
         // given
         [$workspace, $user] = $this->createUserAndWorkspace();
 
-        $invitation = factory(Invitation::class)->create([
-            'workspace_id' => $workspace->id
-        ]);
+        $invitation = Invitation::factory()->create(
+            [
+                'workspace_id' => $workspace->id
+            ]
+        );
 
         // when
         $this->actingAs($user);
@@ -115,9 +126,12 @@ class WorkspaceInvitationsControllerTest extends TestCase
         // then
         $response->assertRedirect(route('users.index'));
 
-        $this->assertDatabaseMissing('invitations', [
-            'id' => $invitation->id
-        ]);
+        $this->assertDatabaseMissing(
+            'invitations',
+            [
+                'id' => $invitation->id
+            ]
+        );
     }
 
     protected function setUp(): void

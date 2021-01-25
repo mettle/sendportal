@@ -2,16 +2,35 @@
 
 declare(strict_types=1);
 
-namespace App;
+namespace App\Models;
 
+use Carbon\Carbon;
+use Database\Factories\WorkspaceFactory;
 use Exception;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Sendportal\Base\Models\BaseModel;
 
+/**
+ * @property int $id
+ * @property int $owner_id
+ * @property string $name
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ *
+ * @property User $owner
+ * @property EloquentCollection $users
+ * @property EloquentCollection $invitations
+ *
+ * @method static WorkspaceFactory factory
+ */
 class Workspace extends BaseModel
 {
+    use HasFactory;
+
     public const ROLE_OWNER = 'owner';
     public const ROLE_MEMBER = 'member';
 
@@ -78,37 +97,6 @@ class Workspace extends BaseModel
     public function invitations(): HasMany
     {
         return $this->hasMany(Invitation::class);
-    }
-
-    /**
-     * The subscriptions that belong to this workspace.
-     *
-     * @return HasMany
-     */
-    public function subscriptions(): HasMany
-    {
-        return $this->hasMany(Subscription::class, 'workspace_id')->orderBy('created_at', 'desc');
-    }
-
-    /**
-     * Make the workspace attributes visible for an owner.
-     *
-     * @return void
-     */
-    public function shouldHaveOwnerVisibility(): void
-    {
-        $this->makeVisible([
-            'card_brand',
-            'card_last_four',
-            'card_country',
-            'billing_address',
-            'billing_address_line_2',
-            'billing_city',
-            'billing_state',
-            'billing_zip',
-            'billing_country',
-            'extra_billing_information',
-        ]);
     }
 
     /**

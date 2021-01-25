@@ -6,16 +6,15 @@ namespace Tests\Feature\Invitations;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use App\Invitation;
-use App\User;
-use App\Workspace;
+use App\Models\Invitation;
+use App\Models\User;
+use App\Models\Workspace;
 use Tests\TestCase;
 
 class NewUserInvitationTest extends TestCase
 {
     use RefreshDatabase,
         WithFaker;
-
 
     public function setUp(): void
     {
@@ -30,10 +29,12 @@ class NewUserInvitationTest extends TestCase
         $this->withoutEvents();
 
         // given
-        $workspace = factory(Workspace::class)->create();
-        $invitation = factory(Invitation::class)->create([
-            'workspace_id' => $workspace->id
-        ]);
+        $workspace = Workspace::factory()->create();
+        $invitation = Invitation::factory()->create(
+            [
+                'workspace_id' => $workspace->id
+            ]
+        );
 
         $postData = [
             'name' => $this->faker->name,
@@ -51,15 +52,18 @@ class NewUserInvitationTest extends TestCase
         /** @var User $user */
         $user = User::where('email', $postData['email'])->first();
 
-        $this->assertNotNull($user);
+        self::assertNotNull($user);
 
-        $this->assertEquals($postData['name'], $user->name);
+        self::assertEquals($postData['name'], $user->name);
 
-        $this->assertTrue($user->onWorkspace($workspace));
+        self::assertTrue($user->onWorkspace($workspace));
 
-        $this->assertDatabaseMissing('invitations', [
-            'token' => $invitation->token
-        ]);
+        $this->assertDatabaseMissing(
+            'invitations',
+            [
+                'token' => $invitation->token
+            ]
+        );
     }
 
     /** @test */
@@ -93,6 +97,6 @@ class NewUserInvitationTest extends TestCase
 
         $user = User::where('email', $postData['email'])->first();
 
-        $this->assertNull($user);
+        self::assertNull($user);
     }
 }

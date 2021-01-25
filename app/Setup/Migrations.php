@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Setup;
 
 use Illuminate\Support\Facades\Artisan;
 
 class Migrations implements StepInterface
 {
-    const VIEW = 'setup.steps.migrations';
+    public const VIEW = 'setup.steps.migrations';
 
     /**
      * {@inheritDoc}

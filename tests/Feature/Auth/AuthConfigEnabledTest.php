@@ -6,10 +6,6 @@ namespace Tests\Feature\Auth;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Str;
-use Sendportal\Base\Models\Campaign;
-use Sendportal\Base\Models\Provider;
-use Sendportal\Base\Models\ProviderType;
 use Tests\TestCase;
 
 class AuthConfigEnabledTest extends TestCase

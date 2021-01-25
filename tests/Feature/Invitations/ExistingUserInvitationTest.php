@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Invitations;
 
-use App\Workspace;
-use App\User;
+use App\Models\Workspace;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Ramsey\Uuid\Uuid;
@@ -21,7 +21,8 @@ class ExistingUserInvitationTest extends TestCase
         // given
         $user = $this->createUserWithWorkspace();
 
-        $newWorkspace = factory(Workspace::class)->create();
+        /** @var Workspace $newWorkspace */
+        $newWorkspace = Workspace::factory()->create();
 
         $newWorkspace->invitations()->create([
             'id' => Uuid::uuid4(),
@@ -47,8 +48,11 @@ class ExistingUserInvitationTest extends TestCase
         // given
         $user = $this->createUserWithWorkspace();
 
-        $secondUser = factory(User::class)->create();
-        $newWorkspace = factory(Workspace::class)->create();
+        /** @var User $secondUser */
+        $secondUser = User::factory()->create();
+
+        /** @var Workspace $newWorkspace */
+        $newWorkspace = Workspace::factory()->create();
 
         $newWorkspace->invitations()->create([
             'id' => Uuid::uuid4(),
@@ -72,7 +76,8 @@ class ExistingUserInvitationTest extends TestCase
         // given
         $user = $this->createUserWithWorkspace();
 
-        $newWorkspace = factory(Workspace::class)->create();
+        /** @var Workspace $newWorkspace */
+        $newWorkspace = Workspace::factory()->create();
 
         $invitation = $newWorkspace->invitations()->create([
             'id' => Uuid::uuid4(),
@@ -89,7 +94,7 @@ class ExistingUserInvitationTest extends TestCase
         // then
         $response->assertRedirect(route('workspaces.index'));
 
-        $this->assertTrue($user->fresh()->onWorkspace($newWorkspace));
+        self::assertTrue($user->fresh()->onWorkspace($newWorkspace));
     }
 
     /** @test */
@@ -98,7 +103,8 @@ class ExistingUserInvitationTest extends TestCase
         // given
         $user = $this->createUserWithWorkspace();
 
-        $newWorkspace = factory(Workspace::class)->create();
+        /** @var Workspace $newWorkspace */
+        $newWorkspace = Workspace::factory()->create();
 
         $invitation = $newWorkspace->invitations()->create([
             'id' => Uuid::uuid4(),
@@ -115,7 +121,7 @@ class ExistingUserInvitationTest extends TestCase
         // then
         $response->assertRedirect(route('workspaces.index'));
 
-        $this->assertFalse($user->fresh()->onWorkspace($newWorkspace));
+        self::assertFalse($user->fresh()->onWorkspace($newWorkspace));
 
         $this->assertDatabaseMissing('invitations', [
             'id' => $invitation->id
@@ -128,7 +134,8 @@ class ExistingUserInvitationTest extends TestCase
         // given
         $user = $this->createUserWithWorkspace();
 
-        $newWorkspace = factory(Workspace::class)->create();
+        /** @var Workspace $newWorkspace */
+        $newWorkspace = Workspace::factory()->create();
 
         $invitation = $newWorkspace->invitations()->create([
             'id' => Uuid::uuid4(),
@@ -146,6 +153,6 @@ class ExistingUserInvitationTest extends TestCase
             ->post(route('workspaces.invitations.accept', $invitation));
 
         // then
-        $this->assertFalse($user->fresh()->onWorkspace($newWorkspace));
+        self::assertFalse($user->fresh()->onWorkspace($newWorkspace));
     }
 }

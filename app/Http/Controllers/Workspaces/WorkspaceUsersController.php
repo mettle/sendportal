@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View as ViewContract;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\User;
+use App\Models\User;
 use App\Services\Workspaces\RemoveUserFromWorkspace;
 
 class WorkspaceUsersController extends Controller

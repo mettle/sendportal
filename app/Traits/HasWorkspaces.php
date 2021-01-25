@@ -7,8 +7,8 @@ namespace App\Traits;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use InvalidArgumentException;
-use App\Invitation;
-use App\Workspace;
+use App\Models\Invitation;
+use App\Models\Workspace;
 
 trait HasWorkspaces
 {

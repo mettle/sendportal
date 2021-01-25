@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Workspaces;
 
+use App\Models\User;
+use App\Models\Workspace;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -22,14 +24,20 @@ class WorkspaceUserControllerTest extends TestCase
         $this->assertLoginRedirect($response);
     }
 
-
     /**
      * @test
      * @group workspace_user_test
      */
     public function users_cannot_view_workspace_users_for_a_workspace_they_do_not_own()
     {
-        $this->createUserAndLogin(['workspace-member']);
+        $user = User::factory()
+            ->hasAttached(
+                Workspace::factory()->count(1),
+                ['role' => Workspace::ROLE_MEMBER]
+            )
+            ->create();
+
+        $this->actingAs($user);
 
         $response = $this->get(route('users.index'));
 
@@ -62,12 +70,12 @@ class WorkspaceUserControllerTest extends TestCase
 
         $otherUser = $this->createWorkspaceUser($workspace);
 
-        $this->assertTrue($otherUser->onWorkspace($workspace));
+        self::assertTrue($otherUser->onWorkspace($workspace));
 
         $this->actingAs($user);
         $this->delete(route('users.destroy', $otherUser->id));
 
-        $this->assertFalse($otherUser->fresh()->onWorkspace($workspace));
+        self::assertFalse($otherUser->fresh()->onWorkspace($workspace));
     }
 
     /**
@@ -83,7 +91,7 @@ class WorkspaceUserControllerTest extends TestCase
 
         $response->assertRedirect();
 
-        $this->assertTrue($user->onWorkspace($workspace));
+        self::assertTrue($user->onWorkspace($workspace));
     }
 
     /**
@@ -92,7 +100,14 @@ class WorkspaceUserControllerTest extends TestCase
      */
     public function only_workspace_owners_can_remove_users_from_a_workspace()
     {
-        $user = $this->createUserAndLogin(['workspace-member']);
+        $user = User::factory()
+            ->hasAttached(
+                Workspace::factory()->count(1),
+                ['role' => Workspace::ROLE_MEMBER]
+            )
+            ->create();
+
+        $this->actingAs($user);
 
         $workspace = $user->currentWorkspace();
 
