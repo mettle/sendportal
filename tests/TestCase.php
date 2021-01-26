@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Tests;
 
-//use Collective\Html\FormFacade;
-//use Orchestra\Testbench\TestCase as BaseTestCase;
-
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
@@ -23,19 +20,7 @@ abstract class TestCase extends BaseTestCase
 
         $this->withoutMix();
         $this->withExceptionHandling();
-        // $this->withFactories(__DIR__ . '/../database/factories');
 
         $this->artisan('migrate')->run();
     }
-
-//    /**
-//     * @param \Illuminate\Foundation\Application $app
-//     * @return array
-//     */
-//    protected function getPackageAliases($app)
-//    {
-//        return [
-//            'Form' => FormFacade::class,
-//        ];
-//    }
 }
