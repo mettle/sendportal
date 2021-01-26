@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Setup;
 
 use Illuminate\Support\Facades\Validator;
@@ -8,18 +10,14 @@ class Url implements StepInterface
 {
     use WritesToEnvironment;
 
-    const VIEW = 'setup.steps.url';
+    public const VIEW = 'setup.steps.url';
 
     /**
      * {@inheritDoc}
      */
     public function check(): bool
     {
-        if (config('app.url') and config('app.url') !== 'http://localhost') {
-            return true;
-        }
-
-        return false;
+        return config('app.url') && config('app.url') !== 'http://localhost';
     }
 
     /**

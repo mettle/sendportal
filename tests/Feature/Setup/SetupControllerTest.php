@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature\Setup;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -22,7 +24,7 @@ class SetupControllerTest extends TestCase
     /** @test */
     public function it_should_redirect_the_user_to_the_login_page_if_sendportal_is_already_installed()
     {
-        factory(User::class)->create();
+        User::factory()->create();
 
         $this
             ->get(route('setup'))

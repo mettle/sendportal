@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
-use App\Workspace;
-use App\User;
+use App\Models\Workspace;
+use App\Models\User;
 use App\Rules\ValidInvitation;
 use App\Services\Workspaces\AcceptInvitation;
 use App\Services\Workspaces\CreateWorkspace;
@@ -71,7 +71,7 @@ class RegisterController extends Controller
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
-                'api_token' => Str::random(80),
+                'api_token' => Str::random(80), // TODO(david): we don't need this
             ]);
 
             if ($token = request('invitation')) {

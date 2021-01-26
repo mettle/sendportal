@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Workspaces;
 
 use Illuminate\Http\Request;
-use App\Workspace;
+use App\Models\Workspace;
 use Illuminate\Http\RedirectResponse;
 
 class SwitchWorkspaceController

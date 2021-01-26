@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Workspaces;
 
 use App\Http\Controllers\Controller;
-use App\Invitation;
+use App\Models\Invitation;
 use App\Services\Workspaces\AcceptInvitation;
 use Exception;
 use Illuminate\Http\RedirectResponse;

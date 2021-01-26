@@ -1,19 +1,37 @@
 <?php
 
-/** @var Factory $factory */
+declare(strict_types=1);
 
-use App\User;
-use App\Workspace;
-use Faker\Generator as Faker;
-use Illuminate\Database\Eloquent\Factory;
+namespace Database\Factories;
 
-$factory->define(Workspace::class, static function (Faker $faker) {
-    return [
-        'name' => $faker->company,
-        'owner_id' => factory(User::class),
-    ];
-});
+use App\Models\User;
+use App\Models\Workspace;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->afterCreating(Workspace::class, static function (Workspace $workspace, Faker $faker) {
-    $workspace->users()->attach($workspace->owner_id, ['role' => Workspace::ROLE_OWNER]);
-});
+class WorkspaceFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Workspace::class;
+
+    /**
+     * Define the model's default state.
+     */
+    public function definition(): array
+    {
+        return [
+            'name' => $this->faker->company,
+            'owner_id' => User::factory(),
+        ];
+    }
+
+    public function configure(): WorkspaceFactory
+    {
+        return $this->afterCreating(static function (Workspace $workspace) {
+            $workspace->users()->attach($workspace->owner_id, ['role' => Workspace::ROLE_OWNER]);
+        });
+    }
+}

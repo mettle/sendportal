@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\Workspaces;
 
-use App\Workspace;
-use App\User;
+use App\Models\Workspace;
+use App\Models\User;
 use App\Repositories\WorkspacesRepository;
 use Exception;
 use Illuminate\Support\Facades\DB;

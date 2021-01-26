@@ -1,21 +1,29 @@
 <?php
 
-/** @var Factory $factory */
+declare(strict_types=1);
 
-use App\Invitation;
-use App\Workspace;
-use Faker\Generator as Faker;
-use Illuminate\Database\Eloquent\Factory;
+namespace Database\Factories;
+
+use App\Models\Invitation;
+use App\Models\Workspace;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Ramsey\Uuid\Uuid;
 
-$factory->define(Invitation::class, static function (Faker $faker) {
-    return [
-        'id' => Uuid::uuid4(),
-        'user_id' => null,
-        'workspace_id' => factory(Workspace::class),
-        'role' => Workspace::ROLE_MEMBER,
-        'email' => $faker->safeEmail,
-        'token' => Str::random(40)
-    ];
-});
+class InvitationFactory extends Factory
+{
+    /** @var string */
+    protected $model = Invitation::class;
+
+    public function definition(): array
+    {
+        return [
+            'id' => Uuid::uuid4(),
+            'user_id' => null,
+            'workspace_id' => Workspace::factory(),
+            'role' => Workspace::ROLE_MEMBER,
+            'email' => $this->faker->safeEmail,
+            'token' => Str::random(40)
+        ];
+    }
+}

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\User;
-use App\Workspace;
+use App\Models\User;
+use App\Models\Workspace;
 use Exception;
 use Illuminate\Database\Console\Migrations\BaseCommand;
 use Illuminate\Database\Migrations\Migrator;
@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use RuntimeException;
-use Sendportal\Base\Facades\Sendportal;
 use Sendportal\Base\SendportalBaseServiceProvider;
 
 class SetupProduction extends BaseCommand

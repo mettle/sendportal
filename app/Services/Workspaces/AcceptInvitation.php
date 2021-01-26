@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Services\Workspaces;
 
-use App\Invitation;
-use App\Workspace;
-use App\User;
+use App\Models\Invitation;
+use App\Models\Workspace;
+use App\Models\User;
 use Exception;
 use RuntimeException;
 

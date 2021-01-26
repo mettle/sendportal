@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Setup;
 
 use Exception;
@@ -11,7 +13,7 @@ class Database implements StepInterface
 {
     use WritesToEnvironment;
 
-    const VIEW = 'setup.steps.database';
+    public const VIEW = 'setup.steps.database';
 
     /**
      * {@inheritDoc}

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Workspaces;
 
-use App\Workspace;
+use App\Models\Workspace;
 use App\Services\Workspaces\AddWorkspaceMember;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -19,7 +19,7 @@ class SwitchWorkspaceTest extends TestCase
         // given
         $user = $this->createUserWithWorkspace();
 
-        $secondWorkspace = factory(Workspace::class)->create(['owner_id' => $user->id]);
+        $secondWorkspace = Workspace::factory()->create(['owner_id' => $user->id]);
 
         (new AddWorkspaceMember())->handle($secondWorkspace, $user, Workspace::ROLE_OWNER);
 
@@ -30,7 +30,7 @@ class SwitchWorkspaceTest extends TestCase
         // then
         $response->assertRedirect(route('sendportal.dashboard'));
 
-        $this->assertEquals($secondWorkspace->id, $user->currentWorkspace()->id);
+        self::assertEquals($secondWorkspace->id, $user->currentWorkspace()->id);
     }
 
     /** @test */
@@ -39,7 +39,7 @@ class SwitchWorkspaceTest extends TestCase
         // given
         [$workspace, $user] = $this->createUserAndWorkspace();
 
-        $secondWorkspace = factory(Workspace::class)->create();
+        $secondWorkspace = Workspace::factory()->create();
 
         // when
         $this->loginUser($user);
@@ -48,7 +48,7 @@ class SwitchWorkspaceTest extends TestCase
         // then
         $response->assertStatus(404);
 
-        $this->assertEquals($workspace->id, $user->currentWorkspace()->id);
+        self::assertEquals($workspace->id, $user->currentWorkspace()->id);
     }
 
     /** @test */
@@ -56,7 +56,7 @@ class SwitchWorkspaceTest extends TestCase
     {
         // given
         $user = $this->createUserWithWorkspace();
-        $secondWorkspace = factory(Workspace::class)->create(['owner_id' => $user->id]);
+        $secondWorkspace = Workspace::factory()->create(['owner_id' => $user->id]);
 
         (new AddWorkspaceMember())->handle($secondWorkspace, $user, Workspace::ROLE_OWNER);
 

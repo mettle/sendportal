@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Setup;
 
 class Env implements StepInterface
 {
-    const VIEW = 'setup.steps.env';
+    public const VIEW = 'setup.steps.env';
 
     /**
      * {@inheritDoc}

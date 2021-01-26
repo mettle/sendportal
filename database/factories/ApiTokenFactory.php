@@ -1,14 +1,22 @@
 <?php
 
-/** @var Factory $factory */
+declare(strict_types=1);
 
-use App\ApiToken;
+namespace Database\Factories;
+
+use App\Models\ApiToken;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use Faker\Generator as Faker;
-use Illuminate\Database\Eloquent\Factory;
 
-$factory->define(ApiToken::class, static function (Faker $faker) {
-    return [
-        'api_token' => Str::random(32),
-    ];
-});
+class ApiTokenFactory extends Factory
+{
+    /** @var string */
+    protected $model = ApiToken::class;
+
+    public function definition(): array
+    {
+        return [
+            'api_token' => Str::random(32),
+        ];
+    }
+}
