@@ -19,7 +19,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string $email
  * @property Carbon|null $email_verified_at
  * @property string $password
- * @property string|null $api_token
  * @property int|null $current_workspace_id
  * @property string|null $remember_token
  * @property string $locale
@@ -44,7 +43,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'email_verified_at',
         'password',
-        'api_token',
         'locale'
     ];
 

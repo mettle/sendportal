@@ -37,7 +37,7 @@ class WorkspaceApiTokenTest extends TestCase
     }
 
     /** @test */
-    public function a_404_is_thrown_when_invalid_token_provided()
+    public function a_401_is_thrown_when_invalid_token_provided()
     {
         [$workspace, $user] = $this->createUserAndWorkspace();
 
@@ -51,6 +51,14 @@ class WorkspaceApiTokenTest extends TestCase
             ]
         );
 
-        $response->assertNotFound();
+        $response->assertUnauthorized();
+    }
+
+    /** @test */
+    public function a_401_is_thrown_when_no_token_is_provided()
+    {
+        $response = $this->get(route('sendportal.api.subscribers.index'));
+
+        $response->assertUnauthorized();
     }
 }

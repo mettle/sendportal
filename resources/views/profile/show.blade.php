@@ -9,39 +9,26 @@
                         {{ __('Profile') }}
                     </div>
                 </div>
-                <div class="card-body">
-                    <form>
-                        <div class="form-group row">
-                            <label for="name" class="col-sm-2 col-form-label">{{ __('Name') }}</label>
-                            <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" id="name" value="{{ auth()->user()->name }}">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="name" class="col-sm-2 col-form-label">{{ __('Email') }}</label>
-                            <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" id="email" value="{{ auth()->user()->email }}">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="locale" class="col-sm-2 col-form-label">{{ __('Locale') }}</label>
-                            <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" id="locale" value="{{ auth()->user()->locale }}">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="api-key" class="col-sm-2 col-form-label">{{ __('API Token') }}</label>
-                            <div class="col-sm-10">
-                                <input type="text" readonly class="form-control-plaintext" id="api-key" value="{{ auth()->user()->api_token }}">
-                            </div>
-                        </div>
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th>{{ __('Name') }}</th>
+                        <td>{{ auth()->user()->name }}</td>
+                    </tr>
 
-                        <div class="form-group row">
-                            <div class="col-sm-6 offset-sm-2">
-                                <a href="{{ route('profile.edit') }}" class="btn btn-md btn-primary">{{ __('Edit') }}</a>
-                            </div>
-                        </div>
-                    </form>
+                    <tr>
+                        <th>{{ __('Email') }}</th>
+                        <td>{{ auth()->user()->email}}</td>
+                    </tr>
+
+                    <tr>
+                        <th>{{ __('Locale') }}</th>
+                        <td>{{ auth()->user()->locale }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="card-body">
+                    <a href="{{ route('profile.edit') }}" class="btn btn-md btn-primary">{{ __('Edit') }}</a>
                 </div>
             </div>
 

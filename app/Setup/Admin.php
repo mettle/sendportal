@@ -32,7 +32,6 @@ class Admin implements StepInterface
             'email' => $input['email'],
             'email_verified_at' => now(),
             'password' => Hash::make($input['password']),
-            'api_token' => Str::random(80)
         ]);
 
         $workspace = Workspace::create([
