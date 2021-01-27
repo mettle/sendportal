@@ -8,9 +8,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ApiTokens\ApiTokenStoreRequest;
 use App\Repositories\ApiTokenRepository;
 use Exception;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Str;
-use Illuminate\View\View;
 use Sendportal\Base\Facades\Sendportal;
 
 class ApiTokenController extends Controller
