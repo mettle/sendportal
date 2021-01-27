@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Middleware;
 
-use App\Workspace;
 use Closure;
 use Sendportal\Base\Facades\Sendportal;
 
@@ -18,11 +19,11 @@ class RequireWorkspace
     {
         $workspaceId = Sendportal::currentWorkspaceId();
 
-        if (empty($workspaceId) && $request->is('api/*')) {
-            return response('Unauthorized.', 403);
+        if ($workspaceId === null && $request->is('api/*')) {
+            return response('Unauthorized.', 401);
         }
 
-        if (empty($workspaceId)) {
+        if ($workspaceId === null) {
             abort(404);
         }
 

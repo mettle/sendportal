@@ -71,7 +71,6 @@ class RegisterController extends Controller
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
-                'api_token' => Str::random(80), // TODO(david): we don't need this
             ]);
 
             if ($token = request('invitation')) {

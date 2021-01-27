@@ -1,23 +1,20 @@
 <?php
 
-use Illuminate\Routing\Router;
+declare(strict_types=1);
+
+use App\Http\Middleware\RequireWorkspace;
 use Illuminate\Support\Facades\Route;
 use Sendportal\Base\Facades\Sendportal;
 
 Route::middleware([
-    'auth:api',
     config('sendportal-host.throttle_middleware'),
-])->name('sendportal.api.')->namespace('Api')->group(static function (Router $router) {
-    $router->apiResource('workspaces', 'WorkspacesController')->only('index');
-});
-
-Route::middleware([
-    config('sendportal-host.throttle_middleware'),
-    \App\Http\Middleware\RequireWorkspace::class
+    RequireWorkspace::class
 ])->group(function() {
 
+    // Auth'd API routes (workspace-level auth!).
     Sendportal::apiRoutes();
 
 });
 
+// Non-auth'd API routes.
 Sendportal::publicApiRoutes();
