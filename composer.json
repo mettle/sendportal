@@ -13,7 +13,7 @@
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.3",
         "laravel/ui": "^3.0",
-        "mettle/sendportal-core": "dev-feature/package-support-l8"
+        "mettle/sendportal-core": "dev-feature/package-support"
     },
     "require-dev": {
         "roave/security-advisories": "dev-master",

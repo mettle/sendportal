@@ -6,6 +6,7 @@ namespace App\Providers;
 
 use App\Models\ApiToken;
 use App\Http\Livewire\Setup;
+use App\Models\User;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 use Sendportal\Base\Facades\Sendportal;
@@ -14,38 +15,43 @@ class AppServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
         //
     }
 
-    /**
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     */
-    public function boot()
+    public function boot(): void
     {
-        Sendportal::currentWorkspaceIdResolver(function() {
-            if (auth()->user()) {
-                return auth()->user()->currentWorkspaceId();
+        Sendportal::setCurrentWorkspaceIdResolver(
+            static function ()
+            {
+                /** @var User $user */
+                if ($user = auth()->user()) {
+                    return $user->currentWorkspaceId();
+                }
+
+                if (($request = request()) && $apiToken = $request->bearerToken()) {
+                    return ApiToken::resolveWorkspaceId($apiToken);
+                }
+
+                return null;
             }
+        );
 
-            if ($apiToken = request()->bearerToken()) {
-                return ApiToken::resolveWorkspaceId($apiToken);
+        Sendportal::setSidebarHtmlContentResolver(
+            static function ()
+            {
+                return view('layouts.sidebar.manageUsersMenuItem')->render();
             }
+        );
 
-            return null;
-        });
-
-        Sendportal::siderbarHtmlContentResolver(function() {
-            return view('layouts.sidebar.manageUsersMenuItem')->render();
-        });
-
-        Sendportal::headerHtmlContentResolver(function() {
-            return view('layouts.header.userManagementHeader')->render();
-        });
+        Sendportal::setHeaderHtmlContentResolver(
+            static function ()
+            {
+                return view('layouts.header.userManagementHeader')->render();
+            }
+        );
 
         Livewire::component('setup', Setup::class);
     }
