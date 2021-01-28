@@ -6,6 +6,8 @@ namespace App\Console\Commands;
 
 use App\Models\User;
 use App\Models\Workspace;
+use App\Traits\HasSendportalCommandUtilities;
+use App\Traits\HasSendportalMigrationHandlers;
 use Exception;
 use Illuminate\Database\Console\Migrations\BaseCommand;
 use Illuminate\Database\Migrations\Migrator;
@@ -18,6 +20,9 @@ use Sendportal\Base\SendportalBaseServiceProvider;
 
 class SetupProduction extends BaseCommand
 {
+    use HasSendportalCommandUtilities;
+    use HasSendportalMigrationHandlers;
+
     /**
      * The name and signature of the console command.
      *
@@ -35,7 +40,7 @@ class SetupProduction extends BaseCommand
     /** @var Migrator */
     protected $migrator;
 
-    public function handle()
+    public function handle(): int
     {
         $this->migrator = app('migrator');
 
@@ -56,8 +61,7 @@ class SetupProduction extends BaseCommand
     }
 
     /**
-     * Check that the environment file exists. If it doesn't, then prompt the user
-     * to create it.
+     * Check that the environment file exists. If it doesn't, then prompt the user to create it.
      */
     protected function checkEnvironment(): void
     {
@@ -82,12 +86,11 @@ class SetupProduction extends BaseCommand
     }
 
     /**
-     * Check that the application key exists. If it doesn't then we'll
-     * create it automatically
+     * Check that the application key exists. If it doesn't then we'll create it automatically.
      */
     protected function checkApplicationKey(): void
     {
-        if (!config('app.key')) {
+        if ( ! config('app.key')) {
             $this->call('key:generate');
         }
 
@@ -118,8 +121,10 @@ class SetupProduction extends BaseCommand
             $this->info('✅ Database connection successful.');
         } catch (Exception $e) {
             try {
-                if (!$this->createDatabaseCredentials()) {
-                    $this->error('A database connection could not be established. Please update your configuration and try again.');
+                if ( ! $this->createDatabaseCredentials()) {
+                    $this->error(
+                        'A database connection could not be established. Please update your configuration and try again.'
+                    );
                     $this->printDatabaseConfig();
                     exit();
                 }
@@ -139,7 +144,7 @@ class SetupProduction extends BaseCommand
             true
         );
 
-        if (!$storeCredentials) {
+        if ( ! $storeCredentials) {
             return false;
         }
 
@@ -181,46 +186,6 @@ class SetupProduction extends BaseCommand
     }
 
     /**
-     * Check if migrations need to be run
-     */
-    protected function checkMigrations(): void
-    {
-        if (!$this->pendingMigrations()) {
-            $this->info('✅ Database migrations are up to date');
-
-            return;
-        }
-
-        if (!$this->runMigrations()) {
-            $this->error('Database migrations must be run before setup can be completed.');
-
-            exit;
-        }
-    }
-
-    /**
-     * Run the database migrations
-     *
-     * @return bool
-     */
-    protected function runMigrations(): bool
-    {
-        $runMigrations = $this->confirm(
-            'There are pending database migrations. Would you like to run migrations now?',
-            true
-        );
-
-        if (!$runMigrations) {
-            return false;
-        }
-
-        $this->call('migrate');
-        $this->info('✅ Database migrations successful');
-
-        return true;
-    }
-
-    /**
      * Check to see if the first admin user account has been created
      */
     protected function checkAdminUserAccount(): void
@@ -246,7 +211,7 @@ class SetupProduction extends BaseCommand
         $this->line('Creating first admin user account and company/workspace');
         $companyName = $this->ask('Company/Workspace name');
 
-        if (!$companyName) {
+        if ( ! $companyName) {
             return $this->getCompanyName();
         }
 
@@ -265,13 +230,15 @@ class SetupProduction extends BaseCommand
         $email = $this->getUserParam('email');
         $password = $this->getUserParam('password');
 
-        $user = User::create([
-            'name' => $name,
-            'email' => $email,
-            'email_verified_at' => now(),
-            'password' => Hash::make($password),
-            'api_token' => Str::random(80),
-        ]);
+        $user = User::create(
+            [
+                'name' => $name,
+                'email' => $email,
+                'email_verified_at' => now(),
+                'password' => Hash::make($password),
+                'api_token' => Str::random(80),
+            ]
+        );
 
         $this->storeWorkspace($user, $companyName);
 
@@ -295,13 +262,16 @@ class SetupProduction extends BaseCommand
             $value = $this->ask(ucfirst($param));
         }
 
-        $validator = Validator::make([$param => $value], [
-            $param => $validationRules[$param],
-        ]);
+        $validator = Validator::make(
+            [$param => $value],
+            [
+                $param => $validationRules[$param],
+            ]
+        );
 
         if ($validator->fails()) {
             foreach ($validator->errors()->getMessages() as $error) {
-                $this->line("{$error[0]}");
+                $this->line((string)($error[0]));
             }
 
             return $this->getUserParam($param);
@@ -315,14 +285,19 @@ class SetupProduction extends BaseCommand
      */
     protected function storeWorkspace(User $user, string $companyName): Workspace
     {
-        $workspace = Workspace::create([
-            'name' => $companyName,
-            'owner_id' => $user->id,
-        ]);
+        $workspace = Workspace::create(
+            [
+                'name' => $companyName,
+                'owner_id' => $user->id,
+            ]
+        );
 
-        $user->workspaces()->attach($workspace, [
-            'role' => Workspace::ROLE_OWNER,
-        ]);
+        $user->workspaces()->attach(
+            $workspace,
+            [
+                'role' => Workspace::ROLE_OWNER,
+            ]
+        );
 
         return $workspace;
     }
@@ -332,11 +307,14 @@ class SetupProduction extends BaseCommand
      */
     protected function checkVendorAssets(): void
     {
-        $this->callSilent('vendor:publish', [
-            '--provider' => SendportalBaseServiceProvider::class,
-            '--tag' => 'sendportal-assets',
-            '--force' => true
-        ]);
+        $this->callSilent(
+            'vendor:publish',
+            [
+                '--provider' => SendportalBaseServiceProvider::class,
+                '--tag' => 'sendportal-assets',
+                '--force' => true
+            ]
+        );
 
         $this->info('✅ Published frontend assets');
     }
@@ -356,48 +334,6 @@ class SetupProduction extends BaseCommand
         $this->line('- Database: ' . config("database.connections.{$connection}.database"));
         $this->line('- Username: ' . config("database.connections.{$connection}.username"));
         $this->line('- Password: ' . config("database.connections.{$connection}.password"));
-    }
-
-    /**
-     * Checks to see if there are any pending migrations
-     *
-     * @return bool
-     */
-    protected function pendingMigrations(): bool
-    {
-        $files = $this->migrator->getMigrationFiles($this->getMigrationPaths());
-
-        return (bool)collect(array_diff(
-            array_keys($files),
-            $this->getPastMigrations()
-        ))->count();
-    }
-
-    /**
-     * Get all migrations that have previously been run
-     *
-     * @return array
-     */
-    protected function getPastMigrations(): array
-    {
-        if (!$this->migrator->repositoryExists()) {
-            return [];
-        }
-
-        return $this->migrator->getRepository()->getRan();
-    }
-
-    /**
-     * Print awesomeness
-     */
-    protected function intro(): void
-    {
-        $this->line('');
-        $this->line(' ____                 _ ____            _        _ ');
-        $this->line('/ ___|  ___ _ __   __| |  _ \ ___  _ __| |_ __ _| |');
-        $this->line('\___ \ / _ \ \'_ \ / _` | |_) / _ \| \'__| __/ _` | |');
-        $this->line(' ___) |  __/ | | | (_| |  __/ (_) | |  | || (_| | |');
-        $this->line('|____/ \___|_| |_|\__,_|_|   \___/|_|   \__\__,_|_|');
     }
 
     /**
@@ -429,13 +365,16 @@ class SetupProduction extends BaseCommand
      */
     protected function writeToEnvironmentFile(string $key, ?string $value): void
     {
-        file_put_contents($this->laravel->environmentFilePath(), preg_replace(
-            $this->keyReplacementPattern($key),
-            "{$key}={$value}",
-            file_get_contents($this->laravel->environmentFilePath())
-        ));
+        file_put_contents(
+            $this->laravel->environmentFilePath(),
+            preg_replace(
+                $this->keyReplacementPattern($key),
+                "{$key}={$value}",
+                file_get_contents($this->laravel->environmentFilePath())
+            )
+        );
 
-        if (!$this->checkEnvValuePresent($key, $value)) {
+        if ( ! $this->checkEnvValuePresent($key, $value)) {
             throw new RuntimeException("Failed to persist environment variable value. {$key}={$value}");
         }
     }
