@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Middleware;
 
 use Closure;
+use RuntimeException;
 use Sendportal\Base\Facades\Sendportal;
 
 class RequireWorkspace
@@ -17,13 +18,14 @@ class RequireWorkspace
      */
     public function handle($request, Closure $next)
     {
-        $workspaceId = Sendportal::currentWorkspaceId();
-
-        if ($workspaceId === null && $request->is('api/*')) {
-            return response('Unauthorized.', 401);
+        try {
+            Sendportal::currentWorkspaceId();
         }
+        catch(RuntimeException $exception) {
+            if($request->is('api/*')) {
+                return response('Unauthorized.', 401);
+            }
 
-        if ($workspaceId === null) {
             abort(404);
         }
 
