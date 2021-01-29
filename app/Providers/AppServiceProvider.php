@@ -9,6 +9,7 @@ use App\Http\Livewire\Setup;
 use App\Models\User;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
+use RuntimeException;
 use Sendportal\Base\Facades\Sendportal;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,31 +25,34 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Sendportal::setCurrentWorkspaceIdResolver(
-            static function ()
-            {
+            static function () {
                 /** @var User $user */
-                if ($user = auth()->user()) {
-                    return $user->currentWorkspaceId();
+                $user = auth()->user();
+                $request = request();
+                $workspaceId = null;
+
+                if ($user && $user->currentWorkspaceId()) {
+                    $workspaceId = $user->currentWorkspaceId();
+                } else if ($request && $apiToken = $request->bearerToken()) {
+                    $workspaceId = ApiToken::resolveWorkspaceId($apiToken);
                 }
 
-                if (($request = request()) && $apiToken = $request->bearerToken()) {
-                    return ApiToken::resolveWorkspaceId($apiToken);
+                if (! $workspaceId) {
+                    throw new RuntimeException("Current Workspace ID Resolver must not return a null value.");
                 }
 
-                return null;
+                return $workspaceId;
             }
         );
 
         Sendportal::setSidebarHtmlContentResolver(
-            static function ()
-            {
+            static function () {
                 return view('layouts.sidebar.manageUsersMenuItem')->render();
             }
         );
 
         Sendportal::setHeaderHtmlContentResolver(
-            static function ()
-            {
+            static function () {
                 return view('layouts.header.userManagementHeader')->render();
             }
         );
