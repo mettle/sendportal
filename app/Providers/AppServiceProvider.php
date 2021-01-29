@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
 
                 if ($user && $user->currentWorkspaceId()) {
                     $workspaceId = $user->currentWorkspaceId();
-                } else if ($request && $apiToken = $request->bearerToken()) {
+                } else if ($request && (($apiToken = $request->bearerToken()) || ($apiToken = $request->get('api_token')))) {
                     $workspaceId = ApiToken::resolveWorkspaceId($apiToken);
                 }
 
