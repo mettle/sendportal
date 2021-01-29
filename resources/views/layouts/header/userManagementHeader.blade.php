@@ -16,7 +16,7 @@
                     {{ auth()->user()->currentWorkspace->name }}<i class="ml-2 fas fa-caret-down color-gray-500"></i>
                 </a>
 
-                <div class="dropdown-menu" aria-labelledby="bd-versions">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-versions">
                     @foreach($workspaces as $workspace)
                         <a class="dropdown-item px-3" href="{{ route('workspaces.switch', $workspace->id) }}">
                             <i class="fas fa-circle mr-2 {{ auth()->user()->currentWorkspace->id == $workspace->id ? 'color-purple-500' : 'color-gray-300' }}"></i>{{ $workspace->name }}
