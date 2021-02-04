@@ -10,7 +10,7 @@ use Illuminate\Database\Console\Migrations\BaseCommand;
 use Illuminate\Database\Migrations\Migrator;
 use Sendportal\Base\SendportalBaseServiceProvider;
 
-class UpgradeProduction extends BaseCommand
+class UpgradeApplication extends BaseCommand
 {
     use HasSendportalCommandUtilities;
     use HasSendportalMigrationHandlers;
@@ -42,9 +42,13 @@ class UpgradeProduction extends BaseCommand
         $this->migrator = app('migrator');
 
         $this->intro();
+        $this->info('');
 
         $this->checkMigrations();
         $this->checkVendorAssets();
+
+        $this->info('✓ SendPortal has been upgraded to version 2');
+        $this->info('');
 
         return 0;
     }
@@ -62,6 +66,6 @@ class UpgradeProduction extends BaseCommand
             ]
         );
 
-        $this->info('✅ Published frontend assets');
+        $this->info('✓ Published frontend assets');
     }
 }

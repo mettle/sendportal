@@ -18,7 +18,7 @@ use Illuminate\Support\Str;
 use RuntimeException;
 use Sendportal\Base\SendportalBaseServiceProvider;
 
-class SetupProduction extends BaseCommand
+class InstallApplication extends BaseCommand
 {
     use HasSendportalCommandUtilities;
     use HasSendportalMigrationHandlers;
@@ -28,7 +28,7 @@ class SetupProduction extends BaseCommand
      *
      * @var string
      */
-    protected $signature = 'sp:setup';
+    protected $signature = 'sp:install';
 
     /**
      * The console command description.
@@ -54,7 +54,7 @@ class SetupProduction extends BaseCommand
         $this->checkAdminUserAccount();
         $this->checkVendorAssets();
 
-        $this->info('✅ Your application is ready!');
+        $this->info('✓ SendPortal is ready!');
         $this->line('');
 
         return 0;
@@ -66,7 +66,7 @@ class SetupProduction extends BaseCommand
     protected function checkEnvironment(): void
     {
         if (file_exists(base_path('.env'))) {
-            $this->info('✅ .env file already exists');
+            $this->info('✓ .env file already exists');
 
             return;
         }
@@ -74,7 +74,7 @@ class SetupProduction extends BaseCommand
         $createFile = $this->confirm('The .env file does not yet exist. Would you like to create it now?', true);
 
         if ($createFile && copy(base_path('.env.example'), base_path('.env'))) {
-            $this->info('✅ .env file has been created');
+            $this->info('✓ .env file has been created');
             $this->call('key:generate');
 
             return;
@@ -94,7 +94,7 @@ class SetupProduction extends BaseCommand
             $this->call('key:generate');
         }
 
-        $this->info('✅ Application key has been set');
+        $this->info('✓ Application key has been set');
     }
 
     /**
@@ -103,7 +103,7 @@ class SetupProduction extends BaseCommand
     protected function checkAppUrl(): void
     {
         if (config('app.url') !== 'http://localhost') {
-            $this->info('✅ Application url set to ' . config('app.url'));
+            $this->info('✓ Application url set to ' . config('app.url'));
 
             return;
         }
@@ -118,7 +118,7 @@ class SetupProduction extends BaseCommand
     {
         try {
             DB::connection()->getPdo();
-            $this->info('✅ Database connection successful.');
+            $this->info('✓ Database connection successful');
         } catch (Exception $e) {
             try {
                 if ( ! $this->createDatabaseCredentials()) {
@@ -191,7 +191,7 @@ class SetupProduction extends BaseCommand
     protected function checkAdminUserAccount(): void
     {
         if (User::count()) {
-            $this->info('✅ Admin user account exists');
+            $this->info('✓ Admin user account exists');
 
             return;
         }
@@ -199,7 +199,7 @@ class SetupProduction extends BaseCommand
         $companyName = $this->getCompanyName();
         $this->createAdminUserAccount($companyName);
 
-        $this->line('✅ Admin user account has been created');
+        $this->line('✓ Admin user account has been created');
     }
 
     /**
@@ -316,7 +316,7 @@ class SetupProduction extends BaseCommand
             ]
         );
 
-        $this->info('✅ Published frontend assets');
+        $this->info('✓ Published frontend assets');
     }
 
     /**

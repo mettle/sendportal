@@ -12,7 +12,7 @@ trait HasSendportalMigrationHandlers
     protected function checkMigrations(): void
     {
         if ( ! $this->pendingMigrations()) {
-            $this->info('✅ Database migrations are up to date');
+            $this->info('✓ Database migrations are up to date');
 
             return;
         }
@@ -41,7 +41,7 @@ trait HasSendportalMigrationHandlers
         }
 
         $this->call('migrate');
-        $this->info('✅ Database migrations successful');
+        $this->info('✓ Database migrations successful');
 
         return true;
     }

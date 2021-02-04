@@ -7,7 +7,7 @@
 <div class="collapse {{ $active ? 'show' : null }}">
     <div class="card-body">
         @if ($step['completed'])
-            <p>✔️ Database connection successful.</p>
+            <p>✔️ Database connection successful</p>
             <button class="btn btn-primary btn-md" wire:click="next">Next</button>
         @else
             @php
