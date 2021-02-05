@@ -10,8 +10,6 @@ Modern open-source self-hosted email marketing.
 
 The core functionality of SendPortal is contained within the [SendPortal Core](https://github.com/mettle/sendportal-core) package. If you would like to add SendPortal to an existing application that already handles user authentication, you only require [SendPortal Core](https://github.com/mettle/sendportal-core).
 
-The [SendPortal](https://github.com/mettle/sendportal) application acts as a wrapper around SendPortal Core. It handles user authentication and workspaces, allowing you to run your copy of SendPortal as a stand-alone application.
-
 ## Features
 SendPortal includes subscriber and list management, email campaigns, message tracking, reports and multiple workspaces/domains in a modern, flexible and scalable application.
 
