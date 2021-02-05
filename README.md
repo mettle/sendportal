@@ -1,16 +1,23 @@
 <p align="center"><img src="https://sendportal.io/img/sendportal.png" width="250"></p>
 
 
-Open-source self-hosted email marketing. Manage your own newsletters at a fraction of the cost.
+Modern open-source self-hosted email marketing.
 
 - [Website](https://sendportal.io)
 - [Documentation](https://sendportal.io/docs)
 
-## Description
+## Introduction
 
 The core functionality of SendPortal is contained within the [SendPortal Core](https://github.com/mettle/sendportal-core) package. If you would like to add SendPortal to an existing application that already handles user authentication, you only require [SendPortal Core](https://github.com/mettle/sendportal-core).
 
 The [SendPortal](https://github.com/mettle/sendportal) application acts as a wrapper around SendPortal Core. It handles user authentication and workspaces, allowing you to run your copy of SendPortal as a stand-alone application.
+
+## Features
+SendPortal includes subscriber and list management, email campaigns, message tracking, reports and multiple workspaces/domains in a modern, flexible and scalable application.
+
+SendPortal integrates with [Amazon SES](https://aws.amazon.com/ses), [Postmark](https://postmarkapp.com), [Sendgrid](https://sendgrid.com), [Mailgun](https://www.mailgun.com/) and [Mailjet](https://www.mailjet.com).
+
+The [SendPortal](https://github.com/mettle/sendportal) application acts as a wrapper around SendPortal Core. This will allow you to run your own copy of SendPortal as a stand-alone application, including user authentication and multiple workspaces.
 
 ## Installation
 
