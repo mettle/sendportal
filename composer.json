@@ -13,7 +13,7 @@
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.3",
         "laravel/ui": "^3.0",
-        "mettle/sendportal-core": "dev-feature/package-support"
+        "mettle/sendportal-core": "^2.0"
     },
     "require-dev": {
         "roave/security-advisories": "dev-master",
@@ -58,14 +58,5 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ]
-    },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../sendportal-core",
-            "options": {
-                "symlink": true
-            }
-        }
-    ]
+    }
 }
