@@ -1,0 +1,79 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Traits;
+
+trait HasSendportalMigrationHandlers
+{
+    /**
+     * Check if migrations need to be run.
+     */
+    protected function checkMigrations(): void
+    {
+        if ( ! $this->pendingMigrations()) {
+            $this->info('✓ Database migrations are up to date');
+
+            return;
+        }
+
+        if ( ! $this->runMigrations()) {
+            $this->error('Database migrations must be run before setup can be completed.');
+
+            exit;
+        }
+    }
+
+    /**
+     * Run the database migrations.
+     *
+     * @return bool
+     */
+    protected function runMigrations(): bool
+    {
+        $runMigrations = $this->confirm(
+            'There are pending database migrations. Would you like to run migrations now?',
+            true
+        );
+
+        if ( ! $runMigrations) {
+            return false;
+        }
+
+        $this->call('migrate');
+        $this->info('✓ Database migrations successful');
+
+        return true;
+    }
+
+    /**
+     * Checks to see if there are any pending migrations
+     *
+     * @return bool
+     */
+    protected function pendingMigrations(): bool
+    {
+        $files = $this->migrator->getMigrationFiles($this->getMigrationPaths());
+
+        return (bool)collect(
+            array_diff(
+                array_keys($files),
+                $this->getPastMigrations()
+            )
+        )->count();
+    }
+
+    /**
+     * Get all migrations that have previously been run
+     *
+     * @return array
+     */
+    protected function getPastMigrations(): array
+    {
+        if ( ! $this->migrator->repositoryExists()) {
+            return [];
+        }
+
+        return $this->migrator->getRepository()->getRan();
+    }
+}

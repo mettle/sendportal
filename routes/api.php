@@ -1,15 +1,20 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+declare(strict_types=1);
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+use App\Http\Middleware\RequireWorkspace;
+use Illuminate\Support\Facades\Route;
+use Sendportal\Base\Facades\Sendportal;
+
+Route::middleware([
+    config('sendportal-host.throttle_middleware'),
+    RequireWorkspace::class
+])->group(function() {
+
+    // Auth'd API routes (workspace-level auth!).
+    Sendportal::apiRoutes();
+
+});
+
+// Non-auth'd API routes.
+Sendportal::publicApiRoutes();
