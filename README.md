@@ -1,13 +1,30 @@
 <p align="center"><img src="https://sendportal.io/img/sendportal.png" width="250"></p>
 
-## About SendPortal
 
-Open-source self-hosted email marketing. Manage your own newsletters at a fraction of the cost.
+Modern open-source self-hosted email marketing.
 
 - [Website](https://sendportal.io)
 - [Documentation](https://sendportal.io/docs)
 
+## Introduction
 
-## Code
+The core functionality of SendPortal is contained within the [SendPortal Core](https://github.com/mettle/sendportal-core) package. If you would like to add SendPortal to an existing application that already handles user authentication, you only require [SendPortal Core](https://github.com/mettle/sendportal-core).
 
-This repo is a wrapper for the main SendPortal codebase. See https://github.com/mettle/sendportal-core for more information.
+## Features
+SendPortal includes subscriber and list management, email campaigns, message tracking, reports and multiple workspaces/domains in a modern, flexible and scalable application.
+
+SendPortal integrates with [Amazon SES](https://aws.amazon.com/ses), [Postmark](https://postmarkapp.com), [Sendgrid](https://sendgrid.com), [Mailgun](https://www.mailgun.com/) and [Mailjet](https://www.mailjet.com).
+
+The [SendPortal](https://github.com/mettle/sendportal) application acts as a wrapper around SendPortal Core. This will allow you to run your own copy of SendPortal as a stand-alone application, including user authentication and multiple workspaces.
+
+## Installation
+
+As of Version 2, SendPortal can be installed as a stand-alone application (i.e. including everything you need to run SendPortal), or as a package inside an existing Laravel application.
+
+If you would like to install SendPortal as a stand-alone application, please follow the [installation guide](https://sendportal.io/docs/v2/getting-started/installation).
+
+If you would like to add SendPortal to an existing application, please follow the [package installation guide](https://sendportal.io/docs/v2/getting-started/package-installation).
+
+## Upgrading
+
+If you already have a copy of SendPortal v1 installed, please follow the [upgrade guide](https://sendportal.io/docs/v2/getting-started/upgrade-guide).
