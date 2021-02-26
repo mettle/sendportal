@@ -29,6 +29,7 @@
                 </table>
                 <div class="card-body">
                     <a href="{{ route('profile.edit') }}" class="btn btn-md btn-primary">{{ __('Edit') }}</a>
+                    <a href="{{ route('profile.password.edit') }}" class="btn btn-md btn-primary">{{ __('Change Password') }}</a>
                 </div>
             </div>
 
