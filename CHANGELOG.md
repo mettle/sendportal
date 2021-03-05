@@ -1,7 +1,15 @@
 # Sendportal
 
-## 1.0.4 - 2020-08-07
+## 2.0.1 - ???
+- Add form for allowing users to update their password ([#118](https://github.com/mettle/sendportal/pull/118))
+- Use bootstrap for pagination ([#117](https://github.com/mettle/sendportal/pull/117))
 - Add changelog.md ([#53](https://github.com/mettle/sendportal/pull/53))
+
+## 2.0.0 - 2021-02-08
+
+- Allow Core to be installed as a package in an existing project ([#88](https://github.com/mettle/sendportal/pull/88))
+- Upgrade Package Support To Laravel 8 ([#108](https://github.com/mettle/sendportal/pull/108))
+- Fix middleware redirect ([#71](https://github.com/mettle/sendportal/pull/71))
 
 ## 1.0.3 - 2020-07-21
 - remove laracatch dependancy ([#57](https://github.com/mettle/sendportal/pull/57))
