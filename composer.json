@@ -13,7 +13,8 @@
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.3",
         "laravel/ui": "^3.0",
-        "mettle/sendportal-core": "^2.0"
+        "mettle/sendportal-core": "@dev",
+        "mettle/sendportal-pro": "@dev"
     },
     "require-dev": {
         "roave/security-advisories": "dev-master",
@@ -46,7 +47,7 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
+    "prefer-stable": false,
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
@@ -58,5 +59,20 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ]
-    }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../sendportal-core",
+            "options": {
+                "symlink": true
+            }
+        },{
+            "type": "path",
+            "url": "../sendportal-pro",
+            "options": {
+                "symlink": true
+            }
+        }
+    ]
 }
