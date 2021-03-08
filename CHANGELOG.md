@@ -1,6 +1,6 @@
 # Sendportal
 
-## 2.0.1 - ???
+## 2.0.1 - 2021-03-08
 - Add form for allowing users to update their password ([#118](https://github.com/mettle/sendportal/pull/118))
 - Use bootstrap for pagination ([#117](https://github.com/mettle/sendportal/pull/117))
 - Add changelog.md ([#53](https://github.com/mettle/sendportal/pull/53))
