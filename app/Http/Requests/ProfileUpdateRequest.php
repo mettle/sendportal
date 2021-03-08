@@ -29,10 +29,6 @@ class ProfileUpdateRequest extends FormRequest
                 'required',
                 Rule::in(array_keys(config()->get('sendportal-host.locale.supported')))
             ],
-            'password_confirmation' => [
-                'required_with:password',
-                'confirmed'
-            ]
         ];
     }
 }
