@@ -25,6 +25,6 @@ class ProfileController extends Controller
     {
         $request->user()->update($request->validated());
 
-        return redirect()->back()->with('success', __('Your profile was updated successfully!'));
+        return redirect()->route('profile.show')->with('success', __('Your profile was updated successfully!'));
     }
 }
