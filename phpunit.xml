@@ -20,7 +20,7 @@
         <env name="CACHE_DRIVER" value="array"/>
         <env name="SESSION_DRIVER" value="array"/>
         <env name="QUEUE_DRIVER" value="sync"/>
-        <env name="DB_DATABASE" value="sendportal_testing"/>
+        <env name="DB_DATABASE" value="sendportal-testing"/>
         <env name="DB_USERNAME" value="root"/>
         <env name="DB_PASSWORD" value="secret"/>
     </php>
