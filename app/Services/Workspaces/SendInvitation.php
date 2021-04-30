@@ -24,6 +24,16 @@ class SendInvitation
 
         $invitation = $this->createInvitation($workspace, $email, Workspace::ROLE_MEMBER, $existingUser);
 
+        if ($existingUser) {
+            // If there is an existing user, we are just going to automatically accept the invitation. This avoids
+            // needing to support displaying workspace invitation management to users who are not part of any existing
+            // workspace, but also just makes sense, as it isn't likely that anyone already signed up to a SendPortal
+            // instance would really want to reject an invitation in the first place, so we remove friction here.
+            /** @var AcceptInvitation $acceptInvitation */
+            $acceptInvitation = app(AcceptInvitation::class);
+            $acceptInvitation->handle($existingUser, $invitation);
+        }
+
         $this->emailInvitation($invitation);
 
         return $invitation;
