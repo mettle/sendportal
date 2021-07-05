@@ -17,3 +17,5 @@ public/vendor/
 resources/lang/vendor/
 resources/views/vendor/
 composer.lock
+phpunit.xml
+
