@@ -1,5 +1,9 @@
 # Sendportal
 
+## 2.0.2 - 2021-07-05
+- Allow overwrite phpunit.xml only locally ([#148](https://github.com/mettle/sendportal/pull/148))
+- Automatic Invitation Acceptance For Existing Users ([#143](https://github.com/mettle/sendportal/pull/143))
+
 ## 2.0.1 - 2021-03-08
 - Add form for allowing users to update their password ([#118](https://github.com/mettle/sendportal/pull/118))
 - Use bootstrap for pagination ([#117](https://github.com/mettle/sendportal/pull/117))
