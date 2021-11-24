@@ -31,7 +31,7 @@ class AcceptInvitation
      */
     public function handle(User $user, Invitation $invitation): bool
     {
-        $workspace = $this->resolveWorkspace($invitation->workspace_id);
+        $workspace = $this->resolveWorkspace(intval($invitation->workspace_id));
 
         if (!$workspace) {
             throw new RuntimeException("Invalid workspace ID encountered: {$invitation->workspace_id}");
