@@ -22,6 +22,6 @@
         <env name="QUEUE_DRIVER" value="sync"/>
         <env name="DB_DATABASE" value="sendportal-testing"/>
         <env name="DB_USERNAME" value="root"/>
-        <env name="DB_PASSWORD" value="secret"/>
+        <env name="DB_PASSWORD" value=""/>
     </php>
 </phpunit>
