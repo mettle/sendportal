@@ -12,6 +12,7 @@ use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 use RuntimeException;
 use Sendportal\Base\Facades\Sendportal;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -54,11 +55,15 @@ class AppServiceProvider extends ServiceProvider
             }
         );
 
+
+
         Sendportal::setHeaderHtmlContentResolver(
             static function () {
                 return view('layouts.header.userManagementHeader')->render();
             }
         );
+
+        Paginator:: useBootstrap();
 
         Livewire::component('setup', Setup::class);
     }
