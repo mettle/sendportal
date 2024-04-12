@@ -67,10 +67,13 @@ class Workspace extends BaseModel
      *
      * @var array
      */
-    protected $casts = [
-        'owner_id' => 'int',
-        'trial_ends_at' => 'datetime',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'owner_id' => 'int',
+            'trial_ends_at' => 'datetime',
+        ];
+    }
 
     /**
      * Get the owner of the workspace.
