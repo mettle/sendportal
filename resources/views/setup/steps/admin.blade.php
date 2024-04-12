@@ -8,7 +8,7 @@
     <div class="collapse {{ $active ? 'show' : null }}">
         <div class="card-body">
             <p>In order to get started, you'll need to create an Admin account</p>
-            <form wire:submit.prevent="run(Object.fromEntries(new FormData($event.target)))">
+            <form wire:submit="run(Object.fromEntries(new FormData($event.target)))">
                 <div class="form-group">
                     <label for="company">Company/Workspace name</label>
                     <input type="text" class="form-control" id="company" name="company" value="{{ old('company') }}" required>

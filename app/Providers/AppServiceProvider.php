@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Models\ApiToken;
-use App\Http\Livewire\Setup;
+use App\Livewire\Setup;
 use App\Models\User;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;

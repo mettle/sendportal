@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Setup;
 
-use App\Http\Livewire\Setup;
+use App\Livewire\Setup;
 use App\Setup\Admin;
 use App\Setup\Env;
 use Illuminate\Foundation\Testing\RefreshDatabase;
