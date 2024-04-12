@@ -13,8 +13,8 @@ use Tests\TestCase;
 
 class NewUserInvitationTest extends TestCase
 {
-    use RefreshDatabase,
-        WithFaker;
+    use RefreshDatabase;
+    use WithFaker;
 
     public function setUp(): void
     {
@@ -24,9 +24,9 @@ class NewUserInvitationTest extends TestCase
     }
 
     /** @test */
-    function a_new_user_can_register_with_an_invitation_to_an_existing_workspace()
+    public function a_new_user_can_register_with_an_invitation_to_an_existing_workspace()
     {
-        $this->withoutEvents();
+        // $this->withoutEvents();
 
         // given
         $workspace = Workspace::factory()->create();
@@ -37,7 +37,7 @@ class NewUserInvitationTest extends TestCase
         );
 
         $postData = [
-            'name' => $this->faker->name,
+            'name' => $this->faker->name(),
             'email' => $invitation->email,
             'password' => $this->faker->password(8),
             'invitation' => $invitation->token
@@ -67,7 +67,7 @@ class NewUserInvitationTest extends TestCase
     }
 
     /** @test */
-    function a_user_cannot_see_the_register_form_with_an_invalid_invitation()
+    public function a_user_cannot_see_the_register_form_with_an_invalid_invitation()
     {
         // when
         $response = $this->get(route('register') . '?invitation=invalid_invitation');
@@ -78,13 +78,13 @@ class NewUserInvitationTest extends TestCase
     }
 
     /** @test */
-    function registrations_fail_validation_when_invitation_is_invalid()
+    public function registrations_fail_validation_when_invitation_is_invalid()
     {
         // given
         $postData = [
-            'name' => $this->faker->name,
-            'email' => $this->faker->safeEmail,
-            'password' => $this->faker->password,
+            'name' => $this->faker->name(),
+            'email' => $this->faker->safeEmail(),
+            'password' => $this->faker->password(),
             'invitation' => 'invalid_invitation'
         ];
 

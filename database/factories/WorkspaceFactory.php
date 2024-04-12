@@ -23,7 +23,7 @@ class WorkspaceFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->company,
+            'name' => $this->faker->company(),
             'owner_id' => User::factory(),
         ];
     }

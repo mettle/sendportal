@@ -13,11 +13,11 @@ use Tests\TestCase;
 
 class WorkspacesControllerTest extends TestCase
 {
-    use RefreshDatabase,
-        WithFaker;
+    use RefreshDatabase;
+    use WithFaker;
 
     /** @test */
-    function a_user_can_see_an_index_of_their_workspaces()
+    public function a_user_can_see_an_index_of_their_workspaces()
     {
         // given
         $user = User::factory()->create();
@@ -39,12 +39,12 @@ class WorkspacesControllerTest extends TestCase
     }
 
     /** @test */
-    function a_user_can_create_a_new_workspace()
+    public public function a_user_can_create_a_new_workspace()
     {
         // given
         $user = $this->createUserWithWorkspace();
 
-        $newWorkspaceName = $this->faker->company;
+        $newWorkspaceName = $this->faker->company();
 
         // when
         $this->loginUser($user);

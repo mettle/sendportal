@@ -15,8 +15,8 @@ use Tests\TestCase;
 
 class WorkspaceInvitationsControllerTest extends TestCase
 {
-    use RefreshDatabase,
-        WithFaker;
+    use RefreshDatabase;
+    use WithFaker;
 
     /** @test */
     public function an_invitation_can_be_sent_to_a_new_user()
@@ -24,7 +24,7 @@ class WorkspaceInvitationsControllerTest extends TestCase
         // given
         [$workspace, $user] = $this->createUserAndWorkspace();
 
-        $email = $this->faker->safeEmail;
+        $email = $this->faker->safeEmail();
 
         $postData = [
             'email' => $email
@@ -85,7 +85,7 @@ class WorkspaceInvitationsControllerTest extends TestCase
 
         (new AddWorkspaceMember())->handle($workspace, $user, Workspace::ROLE_MEMBER);
 
-        $email = $this->faker->safeEmail;
+        $email = $this->faker->safeEmail();
 
         $postData = [
             'email' => $email
