@@ -66,14 +66,8 @@ class WorkspaceInvitationsControllerTest extends TestCase
         // then
         $response->assertRedirect(route('users.index'));
 
-        $this->assertDatabaseHas(
-            'invitations',
-            [
-                'workspace_id' => $workspace->id,
-                'email' => $existingInviteUser->email,
-                'user_id' => $existingInviteUser->id
-            ]
-        );
+        // existing user's invitation will be accepted automatically, and the invitation will be deleted
+        $this->assertDatabaseEmpty('invitations');
     }
 
     /** @test */

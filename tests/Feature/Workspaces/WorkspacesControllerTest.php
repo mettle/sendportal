@@ -39,7 +39,7 @@ class WorkspacesControllerTest extends TestCase
     }
 
     /** @test */
-    public public function a_user_can_create_a_new_workspace()
+    public function a_user_can_create_a_new_workspace()
     {
         // given
         $user = $this->createUserWithWorkspace();
