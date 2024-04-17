@@ -11,7 +11,7 @@
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.4",
         "laravel/ui": "^4.5",
-        "mettle/sendportal-core": "*"
+        "mettle/sendportal-core": "dev-upgrade-dependencies"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -62,11 +62,8 @@
     },
     "repositories": [
         {
-            "type": "path",
-            "url": "/Users/zuzana/Work/Mettle/sendportal-core",
-            "options": {
-                "symlink": true
-            }
+            "type": "vcs",
+            "url": "https://github.com/zuzana-kunckova/sendportal-core"
         }
     ]
 }
