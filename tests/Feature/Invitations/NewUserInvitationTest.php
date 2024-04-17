@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Invitations;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use App\Models\Invitation;
 use App\Models\User;
 use App\Models\Workspace;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
 class NewUserInvitationTest extends TestCase
@@ -26,7 +27,7 @@ class NewUserInvitationTest extends TestCase
     /** @test */
     public function a_new_user_can_register_with_an_invitation_to_an_existing_workspace()
     {
-        // $this->withoutEvents();
+        Event::fake();
 
         // given
         $workspace = Workspace::factory()->create();
