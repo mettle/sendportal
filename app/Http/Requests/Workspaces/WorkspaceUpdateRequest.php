@@ -10,13 +10,11 @@ class WorkspaceUpdateRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array
      */
     public function rules(): array
     {
         return [
-            'workspace_name' => ['required']
+            'workspace_name' => ['required'],
         ];
     }
 }

@@ -11,8 +11,6 @@ class ProfileUpdateRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array
      */
     public function rules(): array
     {
@@ -23,11 +21,11 @@ class ProfileUpdateRequest extends FormRequest
             'email' => [
                 'required',
                 'email',
-                'unique:users,email,' . $this->user()->id,
+                'unique:users,email,'.$this->user()->id,
             ],
             'locale' => [
                 'required',
-                Rule::in(array_keys(config()->get('sendportal-host.locale.supported')))
+                Rule::in(array_keys(config()->get('sendportal-host.locale.supported'))),
             ],
         ];
     }

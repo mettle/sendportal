@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Workspaces;
 
 use App\Http\Controllers\Controller;
-use Exception;
-use Illuminate\Contracts\View\View as ViewContract;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use App\Http\Middleware\OwnsRequestedWorkspace;
 use App\Http\Requests\Workspaces\WorkspaceStoreRequest;
 use App\Http\Requests\Workspaces\WorkspaceUpdateRequest;
 use App\Models\Workspace;
 use App\Repositories\WorkspacesRepository;
 use App\Services\Workspaces\CreateWorkspace;
+use Exception;
+use Illuminate\Contracts\View\View as ViewContract;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class WorkspacesController extends Controller
 {
@@ -31,7 +31,7 @@ class WorkspacesController extends Controller
 
         $this->middleware(OwnsRequestedWorkspace::class)->only([
             'edit',
-            'update'
+            'update',
         ]);
     }
 
@@ -58,7 +58,7 @@ class WorkspacesController extends Controller
     public function edit(Workspace $workspace): ViewContract
     {
         return view('workspaces.edit', [
-            'workspace' => $workspace
+            'workspace' => $workspace,
         ]);
     }
 

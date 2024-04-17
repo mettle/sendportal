@@ -35,8 +35,7 @@ class SetupTest extends TestCase
     {
         $this->mock(
             Env::class,
-            function ($mock)
-            {
+            function ($mock) {
                 $mock->shouldReceive('check')->once()->andReturn(false);
             }
         );

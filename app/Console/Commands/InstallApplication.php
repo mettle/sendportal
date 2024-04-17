@@ -90,7 +90,7 @@ class InstallApplication extends BaseCommand
      */
     protected function checkApplicationKey(): void
     {
-        if ( ! config('app.key')) {
+        if (! config('app.key')) {
             $this->call('key:generate');
         }
 
@@ -103,7 +103,7 @@ class InstallApplication extends BaseCommand
     protected function checkAppUrl(): void
     {
         if (config('app.url') !== 'http://localhost') {
-            $this->info('✓ Application url set to ' . config('app.url'));
+            $this->info('✓ Application url set to '.config('app.url'));
 
             return;
         }
@@ -121,7 +121,7 @@ class InstallApplication extends BaseCommand
             $this->info('✓ Database connection successful');
         } catch (Exception $e) {
             try {
-                if ( ! $this->createDatabaseCredentials()) {
+                if (! $this->createDatabaseCredentials()) {
                     $this->error(
                         'A database connection could not be established. Please update your configuration and try again.'
                     );
@@ -144,7 +144,7 @@ class InstallApplication extends BaseCommand
             true
         );
 
-        if ( ! $storeCredentials) {
+        if (! $storeCredentials) {
             return false;
         }
 
@@ -211,7 +211,7 @@ class InstallApplication extends BaseCommand
         $this->line('Creating first admin user account and company/workspace');
         $companyName = $this->ask('Company/Workspace name');
 
-        if ( ! $companyName) {
+        if (! $companyName) {
             return $this->getCompanyName();
         }
 
@@ -271,7 +271,7 @@ class InstallApplication extends BaseCommand
 
         if ($validator->fails()) {
             foreach ($validator->errors()->getMessages() as $error) {
-                $this->line((string)($error[0]));
+                $this->line((string) ($error[0]));
             }
 
             return $this->getUserParam($param);
@@ -312,7 +312,7 @@ class InstallApplication extends BaseCommand
             [
                 '--provider' => SendportalBaseServiceProvider::class,
                 '--tag' => 'sendportal-assets',
-                '--force' => true
+                '--force' => true,
             ]
         );
 
@@ -329,11 +329,11 @@ class InstallApplication extends BaseCommand
         $this->line('');
         $this->info('Database Configuration:');
         $this->line("- Connection: {$connection}");
-        $this->line('- Host: ' . config("database.connections.{$connection}.host"));
-        $this->line('- Port: ' . config("database.connections.{$connection}.port"));
-        $this->line('- Database: ' . config("database.connections.{$connection}.database"));
-        $this->line('- Username: ' . config("database.connections.{$connection}.username"));
-        $this->line('- Password: ' . config("database.connections.{$connection}.password"));
+        $this->line('- Host: '.config("database.connections.{$connection}.host"));
+        $this->line('- Port: '.config("database.connections.{$connection}.port"));
+        $this->line('- Database: '.config("database.connections.{$connection}.database"));
+        $this->line('- Username: '.config("database.connections.{$connection}.username"));
+        $this->line('- Password: '.config("database.connections.{$connection}.password"));
     }
 
     /**
@@ -344,7 +344,7 @@ class InstallApplication extends BaseCommand
         $connection = $connectionData['DB_CONNECTION'];
 
         $configMap = [
-            'DB_CONNECTION' => "database.default",
+            'DB_CONNECTION' => 'database.default',
             'DB_HOST' => "database.connections.{$connection}.host",
             'DB_PORT' => "database.connections.{$connection}.port",
             'DB_DATABASE' => "database.connections.{$connection}.database",
@@ -374,7 +374,7 @@ class InstallApplication extends BaseCommand
             )
         );
 
-        if ( ! $this->checkEnvValuePresent($key, $value)) {
+        if (! $this->checkEnvValuePresent($key, $value)) {
             throw new RuntimeException("Failed to persist environment variable value. {$key}={$value}");
         }
     }

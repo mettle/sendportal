@@ -32,7 +32,7 @@ class Migrations implements StepInterface
 
     protected function getPastMigrations($migrator): array
     {
-        if (!$migrator->repositoryExists()) {
+        if (! $migrator->repositoryExists()) {
             return [];
         }
 

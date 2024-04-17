@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Services\Workspaces;
 
 use App\Models\Invitation;
-use App\Models\Workspace;
 use App\Models\User;
+use App\Models\Workspace;
 use Exception;
 use RuntimeException;
 
@@ -23,17 +23,14 @@ class AcceptInvitation
     /**
      * Accept user invitation.
      *
-     * @param User $user
-     * @param Invitation $invitation
      *
-     * @return bool
      * @throws Exception
      */
     public function handle(User $user, Invitation $invitation): bool
     {
         $workspace = $this->resolveWorkspace(intval($invitation->workspace_id));
 
-        if (!$workspace) {
+        if (! $workspace) {
             throw new RuntimeException("Invalid workspace ID encountered: {$invitation->workspace_id}");
         }
 

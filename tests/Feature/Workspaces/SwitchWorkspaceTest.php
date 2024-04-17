@@ -14,7 +14,7 @@ class SwitchWorkspaceTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    function a_user_can_switch_between_workspaces()
+    public function a_user_can_switch_between_workspaces()
     {
         // given
         $user = $this->createUserWithWorkspace();
@@ -34,7 +34,7 @@ class SwitchWorkspaceTest extends TestCase
     }
 
     /** @test */
-    function a_user_cannot_switch_to_a_workspace_they_do_not_belong_to()
+    public function a_user_cannot_switch_to_a_workspace_they_do_not_belong_to()
     {
         // given
         [$workspace, $user] = $this->createUserAndWorkspace();
@@ -52,7 +52,7 @@ class SwitchWorkspaceTest extends TestCase
     }
 
     /** @test */
-    function a_guest_cannot_switch_workspaces()
+    public function a_guest_cannot_switch_workspaces()
     {
         // given
         $user = $this->createUserWithWorkspace();

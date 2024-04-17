@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Workspaces;
 
+use App\Models\Invitation;
+use App\Models\User;
+use App\Models\Workspace;
+use App\Services\Workspaces\AddWorkspaceMember;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Mail;
-use App\Models\Invitation;
-use App\Models\Workspace;
-use App\Models\User;
-use App\Services\Workspaces\AddWorkspaceMember;
 use Tests\TestCase;
 
 class WorkspaceInvitationsControllerTest extends TestCase
@@ -27,7 +27,7 @@ class WorkspaceInvitationsControllerTest extends TestCase
         $email = $this->faker->safeEmail();
 
         $postData = [
-            'email' => $email
+            'email' => $email,
         ];
 
         // when
@@ -42,7 +42,7 @@ class WorkspaceInvitationsControllerTest extends TestCase
             [
                 'workspace_id' => $workspace->id,
                 'email' => $email,
-                'user_id' => null
+                'user_id' => null,
             ]
         );
     }
@@ -56,7 +56,7 @@ class WorkspaceInvitationsControllerTest extends TestCase
         $existingInviteUser = User::factory()->create();
 
         $postData = [
-            'email' => $existingInviteUser->email
+            'email' => $existingInviteUser->email,
         ];
 
         // when
@@ -82,7 +82,7 @@ class WorkspaceInvitationsControllerTest extends TestCase
         $email = $this->faker->safeEmail();
 
         $postData = [
-            'email' => $email
+            'email' => $email,
         ];
 
         // when
@@ -96,7 +96,7 @@ class WorkspaceInvitationsControllerTest extends TestCase
             'invitations',
             [
                 'workspace_id' => $workspace->id,
-                'email' => $email
+                'email' => $email,
             ]
         );
     }
@@ -109,7 +109,7 @@ class WorkspaceInvitationsControllerTest extends TestCase
 
         $invitation = Invitation::factory()->create(
             [
-                'workspace_id' => $workspace->id
+                'workspace_id' => $workspace->id,
             ]
         );
 
@@ -123,7 +123,7 @@ class WorkspaceInvitationsControllerTest extends TestCase
         $this->assertDatabaseMissing(
             'invitations',
             [
-                'id' => $invitation->id
+                'id' => $invitation->id,
             ]
         );
     }

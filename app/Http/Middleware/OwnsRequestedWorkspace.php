@@ -11,17 +11,17 @@ class OwnsRequestedWorkspace
 {
     public function handle(Request $request, Closure $next)
     {
-        if (!$user = $request->user()) {
+        if (! $user = $request->user()) {
             abort(404);
         }
 
         $workspace = $request->workspace ?? $request->workspace;
 
-        if (!$workspace) {
+        if (! $workspace) {
             abort(404);
         }
 
-        if (!$user->ownsWorkspace($workspace)) {
+        if (! $user->ownsWorkspace($workspace)) {
             abort(404);
         }
 

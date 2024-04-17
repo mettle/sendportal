@@ -17,7 +17,7 @@ trait WritesToEnvironment
             file_get_contents(app()->environmentFilePath())
         ));
 
-        if (!$this->checkEnvValuePresent($key, $value)) {
+        if (! $this->checkEnvValuePresent($key, $value)) {
             throw new RuntimeException("Failed to persist environment variable value. {$key}={$value}");
         }
     }

@@ -19,7 +19,7 @@ class NewUserInvitationTest extends TestCase
 
     public function setUp(): void
     {
-        putenv("SENDPORTAL_REGISTER=true");
+        putenv('SENDPORTAL_REGISTER=true');
 
         parent::setUp();
     }
@@ -33,7 +33,7 @@ class NewUserInvitationTest extends TestCase
         $workspace = Workspace::factory()->create();
         $invitation = Invitation::factory()->create(
             [
-                'workspace_id' => $workspace->id
+                'workspace_id' => $workspace->id,
             ]
         );
 
@@ -41,7 +41,7 @@ class NewUserInvitationTest extends TestCase
             'name' => $this->faker->name(),
             'email' => $invitation->email,
             'password' => $this->faker->password(8),
-            'invitation' => $invitation->token
+            'invitation' => $invitation->token,
         ];
 
         // when
@@ -62,7 +62,7 @@ class NewUserInvitationTest extends TestCase
         $this->assertDatabaseMissing(
             'invitations',
             [
-                'token' => $invitation->token
+                'token' => $invitation->token,
             ]
         );
     }
@@ -71,7 +71,7 @@ class NewUserInvitationTest extends TestCase
     public function a_user_cannot_see_the_register_form_with_an_invalid_invitation()
     {
         // when
-        $response = $this->get(route('register') . '?invitation=invalid_invitation');
+        $response = $this->get(route('register').'?invitation=invalid_invitation');
 
         // then
         $response->assertRedirect(route('register'));
@@ -86,7 +86,7 @@ class NewUserInvitationTest extends TestCase
             'name' => $this->faker->name(),
             'email' => $this->faker->safeEmail(),
             'password' => $this->faker->password(),
-            'invitation' => 'invalid_invitation'
+            'invitation' => 'invalid_invitation',
         ];
 
         // when

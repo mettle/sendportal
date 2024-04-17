@@ -35,8 +35,8 @@ class ChangePasswordRequest extends FormRequest
             ],
             'password' => [
                 'required',
-                'confirmed'
-            ]
+                'confirmed',
+            ],
         ];
     }
 }

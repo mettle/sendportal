@@ -11,7 +11,7 @@ class ApiTokenStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'description' => ['nullable', 'string']
+            'description' => ['nullable', 'string'],
         ];
     }
 }

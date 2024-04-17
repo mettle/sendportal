@@ -20,7 +20,7 @@ class ChangePasswordController extends Controller
     public function update(ChangePasswordRequest $request): RedirectResponse
     {
         $request->user()->update([
-            'password'=> Hash::make($request->password)
+            'password' => Hash::make($request->password),
         ]);
 
         return redirect()->route('profile.show')
