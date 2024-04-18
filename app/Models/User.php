@@ -7,11 +7,11 @@ namespace App\Models;
 use App\Traits\HasWorkspaces;
 use Carbon\Carbon;
 use Database\Factories\UserFactory;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * @property int $id
@@ -29,9 +29,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable;
     use HasFactory;
     use HasWorkspaces;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -43,7 +43,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'email_verified_at',
         'password',
-        'locale'
+        'locale',
     ];
 
     /**
@@ -56,11 +56,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'remember_token',
     ];
 
-
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime'
+            'email_verified_at' => 'datetime',
         ];
     }
 
@@ -74,8 +73,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /**
      * Return user avatar url
-     *
-     * @return string
      */
     public function getAvatarAttribute(): string
     {

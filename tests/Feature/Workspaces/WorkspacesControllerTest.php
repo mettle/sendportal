@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Workspaces;
 
-use App\Models\Workspace;
 use App\Models\User;
+use App\Models\Workspace;
 use App\Services\Workspaces\AddWorkspaceMember;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -51,7 +51,7 @@ class WorkspacesControllerTest extends TestCase
         $response = $this->post(
             route('workspaces.store'),
             [
-                'name' => $newWorkspaceName
+                'name' => $newWorkspaceName,
             ]
         );
 
@@ -62,7 +62,7 @@ class WorkspacesControllerTest extends TestCase
             'workspaces',
             [
                 'name' => $newWorkspaceName,
-                'owner_id' => $user->id
+                'owner_id' => $user->id,
             ]
         );
 
@@ -73,7 +73,7 @@ class WorkspacesControllerTest extends TestCase
             [
                 'workspace_id' => $newWorkspace->id,
                 'user_id' => $user->id,
-                'role' => Workspace::ROLE_OWNER
+                'role' => Workspace::ROLE_OWNER,
             ]
         );
     }

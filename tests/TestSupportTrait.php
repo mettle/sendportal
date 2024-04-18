@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use Illuminate\Testing\TestResponse;
 use App\Models\User;
 use App\Models\Workspace;
+use Illuminate\Testing\TestResponse;
 
 trait TestSupportTrait
 {

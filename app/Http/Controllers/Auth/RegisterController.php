@@ -4,25 +4,24 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\Workspace;
+use App\Rules\ValidInvitation;
+use App\Services\Workspaces\AcceptInvitation;
+use App\Services\Workspaces\CreateWorkspace;
+use App\Traits\ChecksInvitations;
 use Illuminate\Contracts\Validation\Validator as ValidatorContract;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
-use App\Http\Controllers\Controller;
-use App\Models\Workspace;
-use App\Models\User;
-use App\Rules\ValidInvitation;
-use App\Services\Workspaces\AcceptInvitation;
-use App\Services\Workspaces\CreateWorkspace;
-use App\Traits\ChecksInvitations;
 
 class RegisterController extends Controller
 {
-    use RegistersUsers,
-        ChecksInvitations;
+    use ChecksInvitations,
+        RegistersUsers;
 
     /** @var AcceptInvitation */
     private $acceptInvitation;
@@ -59,7 +58,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'/*, 'confirmed'*/],
-            'invitation' => [new ValidInvitation()]
+            'invitation' => [new ValidInvitation()],
         ]);
     }
 

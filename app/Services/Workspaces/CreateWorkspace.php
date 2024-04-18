@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Services\Workspaces;
 
-use App\Models\Workspace;
 use App\Models\User;
+use App\Models\Workspace;
 use App\Repositories\WorkspacesRepository;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -27,11 +27,7 @@ class CreateWorkspace
     /**
      * Create a new workspace.
      *
-     * @param User $user
-     * @param string $workspaceName
-     * @param string|null $role
      *
-     * @return Workspace
      * @throws Exception
      */
     public function handle(User $user, string $workspaceName, ?string $role = null): Workspace

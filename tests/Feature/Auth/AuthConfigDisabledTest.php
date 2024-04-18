@@ -15,14 +15,14 @@ class AuthConfigDisabledTest extends TestCase
 
     public function setUp(): void
     {
-        putenv("SENDPORTAL_REGISTER=false");
-        putenv("SENDPORTAL_PASSWORD_RESET=false");
+        putenv('SENDPORTAL_REGISTER=false');
+        putenv('SENDPORTAL_PASSWORD_RESET=false');
 
         parent::setUp();
     }
 
     /** @test */
-    function the_registration_routes_result_in_404()
+    public function the_registration_routes_result_in_404()
     {
         $this->get('/register')->assertNotFound();
         $this->post('/register')->assertNotFound();
@@ -33,7 +33,7 @@ class AuthConfigDisabledTest extends TestCase
     }
 
     /** @test */
-    function the_password_reset_routes_result_in_404()
+    public function the_password_reset_routes_result_in_404()
     {
         $this->get('password/reset')->assertNotFound();
         $this->post('password/email')->assertNotFound();

@@ -11,13 +11,13 @@ trait HasSendportalMigrationHandlers
      */
     protected function checkMigrations(): void
     {
-        if ( ! $this->pendingMigrations()) {
+        if (! $this->pendingMigrations()) {
             $this->info('✓ Database migrations are up to date');
 
             return;
         }
 
-        if ( ! $this->runMigrations()) {
+        if (! $this->runMigrations()) {
             $this->error('Database migrations must be run before setup can be completed.');
 
             exit;
@@ -26,8 +26,6 @@ trait HasSendportalMigrationHandlers
 
     /**
      * Run the database migrations.
-     *
-     * @return bool
      */
     protected function runMigrations(): bool
     {
@@ -36,7 +34,7 @@ trait HasSendportalMigrationHandlers
             true
         );
 
-        if ( ! $runMigrations) {
+        if (! $runMigrations) {
             return false;
         }
 
@@ -48,14 +46,12 @@ trait HasSendportalMigrationHandlers
 
     /**
      * Checks to see if there are any pending migrations
-     *
-     * @return bool
      */
     protected function pendingMigrations(): bool
     {
         $files = $this->migrator->getMigrationFiles($this->getMigrationPaths());
 
-        return (bool)collect(
+        return (bool) collect(
             array_diff(
                 array_keys($files),
                 $this->getPastMigrations()
@@ -65,12 +61,10 @@ trait HasSendportalMigrationHandlers
 
     /**
      * Get all migrations that have previously been run
-     *
-     * @return array
      */
     protected function getPastMigrations(): array
     {
-        if ( ! $this->migrator->repositoryExists()) {
+        if (! $this->migrator->repositoryExists()) {
             return [];
         }
 

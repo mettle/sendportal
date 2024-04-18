@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Workspaces;
 
-use Exception;
-use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Middleware\OwnsCurrentWorkspace;
 use App\Http\Requests\Workspaces\WorkspaceInvitationStoreRequest;
 use App\Models\Invitation;
 use App\Services\Workspaces\SendInvitation;
+use Exception;
+use Illuminate\Http\RedirectResponse;
 
 class WorkspaceInvitationsController extends Controller
 {
