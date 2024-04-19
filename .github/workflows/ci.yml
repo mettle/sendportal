@@ -20,8 +20,8 @@ jobs:
         image: mysql:5.7
         env:
           MYSQL_ROOT_PASSWORD: password
-          MYSQL_USER: homestead
-          MYSQL_PASSWORD: secret
+          MYSQL_USER: root
+          MYSQL_PASSWORD: password
           MYSQL_DATABASE: sendportal_dev
         ports:
           - 3306:3306
@@ -30,8 +30,8 @@ jobs:
       postgres:
         image: postgres
         env:
-          POSTGRES_USER: homestead
-          POSTGRES_PASSWORD: secret
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: password
           POSTGRES_DB: sendportal_dev
         ports:
           - 5432:5432
