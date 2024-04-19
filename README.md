@@ -19,12 +19,16 @@ The [SendPortal](https://github.com/mettle/sendportal) application acts as a wra
 
 ## Installation
 
-As of Version 2, SendPortal can be installed as a stand-alone application (i.e. including everything you need to run SendPortal), or as a package inside an existing Laravel application.
-
 If you would like to install SendPortal as a stand-alone application, please follow the [installation guide](https://sendportal.io/docs/v2/getting-started/installation).
 
 If you would like to add SendPortal to an existing application, please follow the [package installation guide](https://sendportal.io/docs/v2/getting-started/package-installation).
 
-## Upgrading
+## Requirements
+SendPortal V3 requires:
 
-If you already have a copy of SendPortal v1 installed, please follow the [upgrade guide](https://sendportal.io/docs/v2/getting-started/upgrade-guide).
+- PHP 8.2+
+- Laravel 10+
+- MySQL (≥ 5.7) or PostgreSQL (≥ 9.4)
+
+If you are on an earlier version of PHP (7.3+) or Laravel (8+), please use [SendPortal V2](https://github.com/mettle/sendportal/releases/tag/v2.0.4)
+
