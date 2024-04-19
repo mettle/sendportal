@@ -10,8 +10,8 @@ use Tests\TestCase;
 
 class AuthConfigEnabledTest extends TestCase
 {
-    use RefreshDatabase,
-        WithFaker;
+    use RefreshDatabase;
+    use WithFaker;
 
     public function setUp(): void
     {

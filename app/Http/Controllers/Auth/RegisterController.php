@@ -20,8 +20,8 @@ use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
-    use ChecksInvitations,
-        RegistersUsers;
+    use ChecksInvitations;
+    use RegistersUsers;
 
     /** @var AcceptInvitation */
     private $acceptInvitation;
