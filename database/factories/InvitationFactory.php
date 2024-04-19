@@ -22,8 +22,8 @@ class InvitationFactory extends Factory
             'user_id' => null,
             'workspace_id' => Workspace::factory(),
             'role' => Workspace::ROLE_MEMBER,
-            'email' => $this->faker->safeEmail,
-            'token' => Str::random(40)
+            'email' => $this->faker->safeEmail(),
+            'token' => Str::random(40),
         ];
     }
 }

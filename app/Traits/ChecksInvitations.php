@@ -10,14 +10,14 @@ trait ChecksInvitations
 {
     protected function isInvalidInvitation(string $invitationToken): bool
     {
-        return !$this->isValidInvitation($invitationToken);
+        return ! $this->isValidInvitation($invitationToken);
     }
 
     protected function isValidInvitation(string $invitationToken): bool
     {
         $invitation = $this->getInvitationFromToken($invitationToken);
 
-        if (!$invitation) {
+        if (! $invitation) {
             return false;
         }
 

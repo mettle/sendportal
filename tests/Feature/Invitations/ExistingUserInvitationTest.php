@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Invitations;
 
-use App\Models\Workspace;
 use App\Models\User;
+use App\Models\Workspace;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Ramsey\Uuid\Uuid;
@@ -124,7 +124,7 @@ class ExistingUserInvitationTest extends TestCase
         self::assertFalse($user->fresh()->onWorkspace($newWorkspace));
 
         $this->assertDatabaseMissing('invitations', [
-            'id' => $invitation->id
+            'id' => $invitation->id,
         ]);
     }
 

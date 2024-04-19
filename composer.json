@@ -4,29 +4,30 @@
     "description": "SendPortal. Open-source self-hosted email marketing. Manage your own newsletters at a fraction of the cost.",
     "license": "MIT",
     "require": {
-        "php": "^7.3",
-        "fideloper/proxy": "^4.4",
-        "fruitcake/laravel-cors": "^2.0",
-        "guzzlehttp/guzzle": "^7.0.1",
-        "laravel/framework": "^8.0",
-        "laravel/horizon": "^5.0",
-        "laravel/tinker": "^2.5",
-        "livewire/livewire": "^2.3",
-        "laravel/ui": "^3.0",
-        "mettle/sendportal-core": "^2.0"
+        "php": "^8.2|^8.3",
+        "guzzlehttp/guzzle": "^7.8.1",
+        "laravel/framework": "^11.0",
+        "laravel/horizon": "^5.24",
+        "laravel/tinker": "^2.9",
+        "livewire/livewire": "^3.4",
+        "laravel/ui": "^4.5",
+        "mettle/sendportal-core": "^3.0"
     },
     "require-dev": {
+        "fakerphp/faker": "^1.23",
+        "mockery/mockery": "^1.6",
+        "nunomaduro/collision": "^8.1",
+        "phpunit/phpunit": "^10.5",
         "roave/security-advisories": "dev-master",
-        "facade/ignition": "^2.5",
-        "fzaninotto/faker": "^1.9.2",
-        "mockery/mockery": "^1.4.2",
-        "nunomaduro/collision": "^5.0",
-        "phpunit/phpunit": "^9.3.3"
+        "spatie/laravel-ignition": "^2.5.1"
     },
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     },
     "extra": {
         "laravel": {

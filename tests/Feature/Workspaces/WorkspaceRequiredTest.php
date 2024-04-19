@@ -16,6 +16,7 @@ class WorkspaceRequiredTest extends TestCase
 
     /**
      * @test
+     *
      * @group workspace_user_test
      */
     public function user_gets_404_if_no_workspace_provided()

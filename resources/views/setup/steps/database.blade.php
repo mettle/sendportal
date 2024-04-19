@@ -15,7 +15,7 @@
             @endphp
             <p>✖️ A database connection could not be established. Please update your configuration and try again.</p>
 
-            <form wire:submit.prevent="run(Object.fromEntries(new FormData($event.target)))">
+            <form wire:submit="run(Object.fromEntries(new FormData($event.target)))">
                 <div class="form-group">
                     <label for="connection">Database Connection</label>
                     <select name="connection" class="form-control" required>

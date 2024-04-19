@@ -29,14 +29,13 @@ class ApiToken extends BaseModel
     /**
      * @var array
      */
-    protected $casts = [
-        'workspace_id' => 'integer'
-    ];
+    protected function casts(): array
+    {
+        return [
+            'workspace_id' => 'integer',
+        ];
+    }
 
-    /**
-     * @param $rawHeaderValue
-     * @return int|null
-     */
     public static function resolveWorkspaceId($rawHeaderValue): ?int
     {
         $apiTokenInstance = self::where('api_token', $rawHeaderValue)->first();

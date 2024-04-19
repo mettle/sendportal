@@ -4,43 +4,44 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Invitations;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use App\Models\Invitation;
 use App\Models\User;
 use App\Models\Workspace;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
 class NewUserInvitationTest extends TestCase
 {
-    use RefreshDatabase,
-        WithFaker;
+    use RefreshDatabase;
+    use WithFaker;
 
     public function setUp(): void
     {
-        putenv("SENDPORTAL_REGISTER=true");
+        putenv('SENDPORTAL_REGISTER=true');
 
         parent::setUp();
     }
 
     /** @test */
-    function a_new_user_can_register_with_an_invitation_to_an_existing_workspace()
+    public function a_new_user_can_register_with_an_invitation_to_an_existing_workspace()
     {
-        $this->withoutEvents();
+        Event::fake();
 
         // given
         $workspace = Workspace::factory()->create();
         $invitation = Invitation::factory()->create(
             [
-                'workspace_id' => $workspace->id
+                'workspace_id' => $workspace->id,
             ]
         );
 
         $postData = [
-            'name' => $this->faker->name,
+            'name' => $this->faker->name(),
             'email' => $invitation->email,
             'password' => $this->faker->password(8),
-            'invitation' => $invitation->token
+            'invitation' => $invitation->token,
         ];
 
         // when
@@ -61,16 +62,16 @@ class NewUserInvitationTest extends TestCase
         $this->assertDatabaseMissing(
             'invitations',
             [
-                'token' => $invitation->token
+                'token' => $invitation->token,
             ]
         );
     }
 
     /** @test */
-    function a_user_cannot_see_the_register_form_with_an_invalid_invitation()
+    public function a_user_cannot_see_the_register_form_with_an_invalid_invitation()
     {
         // when
-        $response = $this->get(route('register') . '?invitation=invalid_invitation');
+        $response = $this->get(route('register').'?invitation=invalid_invitation');
 
         // then
         $response->assertRedirect(route('register'));
@@ -78,14 +79,14 @@ class NewUserInvitationTest extends TestCase
     }
 
     /** @test */
-    function registrations_fail_validation_when_invitation_is_invalid()
+    public function registrations_fail_validation_when_invitation_is_invalid()
     {
         // given
         $postData = [
-            'name' => $this->faker->name,
-            'email' => $this->faker->safeEmail,
-            'password' => $this->faker->password,
-            'invitation' => 'invalid_invitation'
+            'name' => $this->faker->name(),
+            'email' => $this->faker->safeEmail(),
+            'password' => $this->faker->password(),
+            'invitation' => 'invalid_invitation',
         ];
 
         // when

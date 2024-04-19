@@ -1,0 +1,29 @@
+name: Format [PHP]
+
+on:
+  pull_request:
+    paths:
+      - '**.php'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  php-cs-fixer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Run php-cs-fixer
+        uses: docker://oskarstark/php-cs-fixer-ga:3.13.0
+        with:
+          args: --config=.php-cs-fixer.dist.php
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Apply php-cs-fixer changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

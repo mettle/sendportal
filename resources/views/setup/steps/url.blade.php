@@ -13,7 +13,7 @@
             <p>✔️ The Application url is set to {{ config('app.url') }}</p>
             <button class="btn btn-primary btn-md" wire:click="next">Next</button>
         @else
-            <form wire:submit.prevent="run(Object.fromEntries(new FormData($event.target)))">
+            <form wire:submit="run(Object.fromEntries(new FormData($event.target)))">
                 <div class="form-group">
                     <label for="url">Application Url</label>
                     <input type="url" class="form-control" id="url" name="url" placeholder="https://sendportal.yourdomain.com" value="{{ old('url') }}" required>

@@ -12,7 +12,7 @@ class ValidInvitation implements Rule
     use ChecksInvitations;
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function passes($attribute, $value)
     {
@@ -24,7 +24,7 @@ class ValidInvitation implements Rule
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function message()
     {

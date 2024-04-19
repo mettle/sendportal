@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Traits;
 
+use App\Models\Invitation;
+use App\Models\Workspace;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use InvalidArgumentException;
-use App\Models\Invitation;
-use App\Models\Workspace;
 
 trait HasWorkspaces
 {
@@ -40,7 +40,7 @@ trait HasWorkspaces
 
     public function ownsWorkspace(Workspace $workspace): bool
     {
-        return $this->id && $workspace->owner_id && (int)$this->id === (int)$workspace->owner_id;
+        return $this->id && $workspace->owner_id && (int) $this->id === (int) $workspace->owner_id;
     }
 
     public function currentWorkspaceId(): ?int
@@ -51,11 +51,13 @@ trait HasWorkspaces
 
         if ($this->current_workspace_id) {
             $this->switchToWorkspace(Workspace::find($this->current_workspace_id));
+
             return $this->activeWorkspace->id;
         }
 
         if ($this->activeWorkspace === null && $this->hasWorkspaces()) {
             $this->switchToWorkspace($this->workspaces()->first());
+
             return $this->activeWorkspace->id;
         }
 
@@ -69,12 +71,12 @@ trait HasWorkspaces
 
     public function ownsCurrentWorkspace(): bool
     {
-        return $this->currentWorkspace() && (int)$this->currentWorkspace()->owner_id === (int)$this->id;
+        return $this->currentWorkspace() && (int) $this->currentWorkspace()->owner_id === (int) $this->id;
     }
 
     public function switchToWorkspace(Workspace $workspace): void
     {
-        if (!$this->onWorkspace($workspace)) {
+        if (! $this->onWorkspace($workspace)) {
             throw new InvalidArgumentException('User does not belong to this workspace');
         }
 
@@ -91,12 +93,15 @@ trait HasWorkspaces
         }
         if ($this->current_workspace_id) {
             $this->switchToWorkspace(Workspace::find($this->current_workspace_id));
+
             return $this->activeWorkspace;
         }
         if ($this->activeWorkspace === null && $this->hasWorkspaces()) {
             $this->switchToWorkspace($this->workspaces()->first());
+
             return $this->activeWorkspace;
         }
+
         return null;
     }
 }

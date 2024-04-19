@@ -35,7 +35,7 @@ class Url implements StepInterface
     public function validate(array $input = []): array
     {
         $validationRules = [
-            'url' => ['required', 'url']
+            'url' => ['required', 'url'],
         ];
 
         $validator = Validator::make($input, $validationRules);

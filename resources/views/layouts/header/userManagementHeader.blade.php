@@ -30,10 +30,10 @@
 
             <a class="nav-link dropdown-toggle mr-md-1 color-purple-500" href="#" id="bd-versions"
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-               title="{{{ auth()->user()->full_name }}}">
-                <img src="{{{ auth()->user()->avatar }}}" height="25" class="rounded-circle mr-2"
+               title="{{ auth()->user()->full_name }}">
+                <img src="{{ auth()->user()->avatar }}" height="25" class="rounded-circle mr-2"
                      alt="{{ auth()->user()->name }}">
-                <span class="d-none d-sm-inline-block">{{{ \Illuminate\Support\Str::limit( auth()->user()->name, 25) }}}</span>
+                <span class="d-none d-sm-inline-block">{{ \Illuminate\Support\Str::limit( auth()->user()->name, 25) }}</span>
                 <i
                         class="ml-2 fas fa-caret-down color-gray-500"></i>
             </a>

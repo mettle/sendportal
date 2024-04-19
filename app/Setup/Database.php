@@ -37,7 +37,7 @@ class Database implements StepInterface
         $connection = $input['connection'];
 
         $fields = [
-            'connection' => "database.default",
+            'connection' => 'database.default',
             'host' => "database.connections.{$connection}.host",
             'port' => "database.connections.{$connection}.port",
             'database' => "database.connections.{$connection}.database",
@@ -46,7 +46,7 @@ class Database implements StepInterface
         ];
 
         foreach ($fields as $field => $config) {
-            $this->writeToEnvironmentFile('DB_'. strtoupper($field), $input[$field]);
+            $this->writeToEnvironmentFile('DB_'.strtoupper($field), $input[$field]);
 
             config()->set($config, $input[$field]);
         }
@@ -72,7 +72,7 @@ class Database implements StepInterface
             'port' => ['required', 'string'],
             'database' => ['required', 'string'],
             'username' => ['required', 'string'],
-            'password' => ['required', 'string']
+            'password' => ['required', 'string'],
         ];
 
         $validator = Validator::make($input, $validationRules);

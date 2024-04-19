@@ -1,0 +1,55 @@
+on: push
+name: Laravel CI
+jobs:
+  phpunit:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        container: [
+          "kirschbaumdevelopment/laravel-test-runner:8.2",
+          "kirschbaumdevelopment/laravel-test-runner:8.3"
+        ]
+
+    container:
+      image: ${{ matrix.container }}
+
+    name: ${{ matrix.container }}
+
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_USER: homestead
+          MYSQL_PASSWORD: secret
+          MYSQL_DATABASE: sendportal_dev
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: homestead
+          POSTGRES_PASSWORD: secret
+          POSTGRES_DB: sendportal_dev
+        ports:
+          - 5432:5432
+        options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install composer dependencies
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      - name: Run Testsuite against MySQL
+        run: vendor/bin/phpunit
+        env:
+          DB_CONNECTION: mysql
+          DB_HOST: mysql
+          DB_PORT: 3306
+      - name: Run Testsuite against Postgres
+        run: vendor/bin/phpunit
+        env:
+          DB_CONNECTION: pgsql
+          DB_HOST: postgres
+          DB_PORT: 5432

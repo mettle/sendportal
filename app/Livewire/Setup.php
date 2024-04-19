@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use App\Setup\Admin;
 use App\Setup\Database;
@@ -29,7 +29,7 @@ class Setup extends Component
     ];
 
     protected $listeners = [
-        'next' => 'next'
+        'next' => 'next',
     ];
 
     public function render()
@@ -110,7 +110,6 @@ class Setup extends Component
     /**
      * Get the concrete Step class.
      *
-     * @return StepInterface
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     protected function getConcreteHandler(): StepInterface

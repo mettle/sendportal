@@ -1,5 +1,8 @@
 # Sendportal
 
+## 3.0.0 - 2024-04-19
+- Update to Laravel 11 ([#290](https://github.com/mettle/sendportal/pull/290)
+
 ## 2.0.3 - 2021-07-05
 - Allow overwrite phpunit.xml only locally ([#148](https://github.com/mettle/sendportal/pull/148))
 

@@ -8,8 +8,8 @@ use Sendportal\Base\Facades\Sendportal;
 
 Route::middleware([
     config('sendportal-host.throttle_middleware'),
-    RequireWorkspace::class
-])->group(function() {
+    RequireWorkspace::class,
+])->group(function () {
 
     // Auth'd API routes (workspace-level auth!).
     Sendportal::apiRoutes();

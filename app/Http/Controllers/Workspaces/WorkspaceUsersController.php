@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Workspaces;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Services\Workspaces\RemoveUserFromWorkspace;
 use Illuminate\Contracts\View\View as ViewContract;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Services\Workspaces\RemoveUserFromWorkspace;
 
 class WorkspaceUsersController extends Controller
 {
@@ -31,10 +31,6 @@ class WorkspaceUsersController extends Controller
 
     /**
      * Remove a user from the current workspace.
-     *
-     * @param int $userId
-     *
-     * @return RedirectResponse
      */
     public function destroy(Request $request, int $userId): RedirectResponse
     {

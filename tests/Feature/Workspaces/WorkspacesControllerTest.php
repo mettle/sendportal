@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Workspaces;
 
-use App\Models\Workspace;
 use App\Models\User;
+use App\Models\Workspace;
 use App\Services\Workspaces\AddWorkspaceMember;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -13,11 +13,11 @@ use Tests\TestCase;
 
 class WorkspacesControllerTest extends TestCase
 {
-    use RefreshDatabase,
-        WithFaker;
+    use RefreshDatabase;
+    use WithFaker;
 
     /** @test */
-    function a_user_can_see_an_index_of_their_workspaces()
+    public function a_user_can_see_an_index_of_their_workspaces()
     {
         // given
         $user = User::factory()->create();
@@ -39,19 +39,19 @@ class WorkspacesControllerTest extends TestCase
     }
 
     /** @test */
-    function a_user_can_create_a_new_workspace()
+    public function a_user_can_create_a_new_workspace()
     {
         // given
         $user = $this->createUserWithWorkspace();
 
-        $newWorkspaceName = $this->faker->company;
+        $newWorkspaceName = $this->faker->company();
 
         // when
         $this->loginUser($user);
         $response = $this->post(
             route('workspaces.store'),
             [
-                'name' => $newWorkspaceName
+                'name' => $newWorkspaceName,
             ]
         );
 
@@ -62,7 +62,7 @@ class WorkspacesControllerTest extends TestCase
             'workspaces',
             [
                 'name' => $newWorkspaceName,
-                'owner_id' => $user->id
+                'owner_id' => $user->id,
             ]
         );
 
@@ -73,7 +73,7 @@ class WorkspacesControllerTest extends TestCase
             [
                 'workspace_id' => $newWorkspace->id,
                 'user_id' => $user->id,
-                'role' => Workspace::ROLE_OWNER
+                'role' => Workspace::ROLE_OWNER,
             ]
         );
     }
