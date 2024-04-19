@@ -199,7 +199,7 @@ class InstallApplication extends BaseCommand
         $companyName = $this->getCompanyName();
         $this->createAdminUserAccount($companyName);
 
-        $this->line('✓ Admin user account has been created');
+        $this->info('✓ Admin user account has been created');
     }
 
     /**
