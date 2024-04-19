@@ -57,6 +57,6 @@ class SetupTest extends TestCase
         $step = $setup->get('steps')[$setup->get('active')];
 
         self::assertEquals(Admin::class, $step['handler']);
-        self::assertEquals(false, $step['completed']);
+        self::assertEquals(5, $step['completed']);
     }
 }

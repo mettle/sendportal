@@ -11,8 +11,8 @@ use Tests\TestCase;
 
 class WorkspaceRequiredTest extends TestCase
 {
-    use RefreshDatabase,
-        WithFaker;
+    use RefreshDatabase;
+    use WithFaker;
 
     /**
      * @test

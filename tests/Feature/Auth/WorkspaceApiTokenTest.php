@@ -12,8 +12,8 @@ use Tests\TestCase;
 
 class WorkspaceApiTokenTest extends TestCase
 {
-    use RefreshDatabase,
-        WithFaker;
+    use RefreshDatabase;
+    use WithFaker;
 
     /**
      * @test

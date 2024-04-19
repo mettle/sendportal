@@ -91,11 +91,13 @@ trait HasWorkspaces
         if ($this->activeWorkspace !== null) {
             return $this->activeWorkspace;
         }
+
         if ($this->current_workspace_id) {
             $this->switchToWorkspace(Workspace::find($this->current_workspace_id));
 
             return $this->activeWorkspace;
         }
+
         if ($this->activeWorkspace === null && $this->hasWorkspaces()) {
             $this->switchToWorkspace($this->workspaces()->first());
 

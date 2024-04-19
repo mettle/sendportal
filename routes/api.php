@@ -10,10 +10,8 @@ Route::middleware([
     config('sendportal-host.throttle_middleware'),
     RequireWorkspace::class,
 ])->group(function () {
-
     // Auth'd API routes (workspace-level auth!).
     Sendportal::apiRoutes();
-
 });
 
 // Non-auth'd API routes.
