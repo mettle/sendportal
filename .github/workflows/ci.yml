@@ -9,10 +9,6 @@ jobs:
           "kirschbaumdevelopment/laravel-test-runner:8.2",
           "kirschbaumdevelopment/laravel-test-runner:8.3"
         ]
-        db_connection: [
-          "mysql",
-          "pgsql"
-        ]
 
     container:
       image: ${{ matrix.container }}
@@ -48,4 +44,10 @@ jobs:
       - name: Run Testsuite against MySQL
         run: vendor/bin/phpunit
         env:
-          DB_CONNECTION: ${{ matrix.db_connection }}
+          DB_CONNECTION: mysql
+          DB_HOST: mysql
+      - name: Run Testsuite against Postgres
+        run: vendor/bin/phpunit
+        env:
+          DB_CONNECTION: pgsql
+          DB_HOST: postgres
