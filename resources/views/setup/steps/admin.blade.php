@@ -26,7 +26,7 @@
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" required minlength="8">
+                    <input type="password" class="form-control" id="password" name="password" value="{{ old('password') }}" required minlength="8">
                     @error('password') <span class="form-text text-danger">{{ $message }}</span>@enderror
                 </div>
                 <button class="btn btn-primary btn-md" type="submit" wire:loading.attr="disabled">
