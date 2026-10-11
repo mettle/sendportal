@@ -6,8 +6,9 @@ jobs:
     strategy:
       matrix:
         container: [
-          "kirschbaumdevelopment/laravel-test-runner:8.2",
-          "kirschbaumdevelopment/laravel-test-runner:8.3"
+          "kirschbaumdevelopment/laravel-test-runner:8.3",
+          "kirschbaumdevelopment/laravel-test-runner:8.4",
+          "kirschbaumdevelopment/laravel-test-runner:8.5"
         ]
 
     container:

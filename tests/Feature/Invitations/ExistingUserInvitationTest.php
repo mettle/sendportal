@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Workspace;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
+use PHPUnit\Framework\Attributes\Test;
 use Ramsey\Uuid\Uuid;
 use Tests\TestCase;
 
@@ -15,7 +16,7 @@ class ExistingUserInvitationTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function a_user_can_see_their_invitations()
     {
         // given
@@ -42,7 +43,7 @@ class ExistingUserInvitationTest extends TestCase
         $response->assertSee('Reject');
     }
 
-    /** @test */
+    #[Test]
     public function a_user_cannot_see_another_users_invitations()
     {
         // given
@@ -70,7 +71,7 @@ class ExistingUserInvitationTest extends TestCase
         $response->assertDontSee($newWorkspace->name);
     }
 
-    /** @test */
+    #[Test]
     public function a_user_can_accept_valid_invitations()
     {
         // given
@@ -97,7 +98,7 @@ class ExistingUserInvitationTest extends TestCase
         self::assertTrue($user->fresh()->onWorkspace($newWorkspace));
     }
 
-    /** @test */
+    #[Test]
     public function a_user_can_reject_invitations()
     {
         // given
@@ -128,7 +129,7 @@ class ExistingUserInvitationTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function a_user_cannot_accept_an_expired_invitation()
     {
         // given

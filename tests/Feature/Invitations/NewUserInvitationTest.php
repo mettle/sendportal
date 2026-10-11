@@ -10,6 +10,7 @@ use App\Models\Workspace;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Event;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class NewUserInvitationTest extends TestCase
@@ -24,7 +25,7 @@ class NewUserInvitationTest extends TestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[Test]
     public function a_new_user_can_register_with_an_invitation_to_an_existing_workspace()
     {
         Event::fake();
@@ -67,7 +68,7 @@ class NewUserInvitationTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function a_user_cannot_see_the_register_form_with_an_invalid_invitation()
     {
         // when
@@ -78,7 +79,7 @@ class NewUserInvitationTest extends TestCase
         $response->assertSessionHas('error', 'The invitation is no longer valid.');
     }
 
-    /** @test */
+    #[Test]
     public function registrations_fail_validation_when_invitation_is_invalid()
     {
         // given

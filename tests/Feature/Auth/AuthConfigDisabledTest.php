@@ -6,6 +6,7 @@ namespace Tests\Feature\Auth;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class AuthConfigDisabledTest extends TestCase
@@ -21,7 +22,7 @@ class AuthConfigDisabledTest extends TestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[Test]
     public function the_registration_routes_result_in_404()
     {
         $this->get('/register')->assertNotFound();
@@ -32,7 +33,7 @@ class AuthConfigDisabledTest extends TestCase
         $this->post('email/resend')->assertNotFound();
     }
 
-    /** @test */
+    #[Test]
     public function the_password_reset_routes_result_in_404()
     {
         $this->get('password/reset')->assertNotFound();

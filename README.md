@@ -24,10 +24,12 @@ If you would like to install SendPortal as a stand-alone application, please fol
 If you would like to add SendPortal to an existing application, please follow the [package installation guide](https://sendportal.io/docs/v2/getting-started/package-installation).
 
 ## Requirements
-SendPortal V3 requires:
+SendPortal V4 requires:
 
-- PHP 8.2+
-- Laravel 10+
-- MySQL (≥ 5.7) or PostgreSQL (≥ 9.4)
+- PHP 8.3+
+- Laravel 13
+- MySQL (≥ 5.7) or PostgreSQL (≥ 10)
+
+If you are on PHP 8.2 or Laravel 10/11, please use [SendPortal V3](https://github.com/mettle/sendportal/releases/tag/v3.0.0)
 
 If you are on an earlier version of PHP (7.3+) or Laravel (8+), please use [SendPortal V2](https://github.com/mettle/sendportal/releases/tag/v2.0.4)

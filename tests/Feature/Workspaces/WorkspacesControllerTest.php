@@ -9,6 +9,7 @@ use App\Models\Workspace;
 use App\Services\Workspaces\AddWorkspaceMember;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class WorkspacesControllerTest extends TestCase
@@ -16,7 +17,7 @@ class WorkspacesControllerTest extends TestCase
     use RefreshDatabase;
     use WithFaker;
 
-    /** @test */
+    #[Test]
     public function a_user_can_see_an_index_of_their_workspaces()
     {
         // given
@@ -38,7 +39,7 @@ class WorkspacesControllerTest extends TestCase
         $response->assertSee($workspaces[1]->name);
     }
 
-    /** @test */
+    #[Test]
     public function a_user_can_create_a_new_workspace()
     {
         // given

@@ -7,13 +7,14 @@ namespace Tests\Feature\Workspaces;
 use App\Models\Workspace;
 use App\Services\Workspaces\AddWorkspaceMember;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class SwitchWorkspaceTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function a_user_can_switch_between_workspaces()
     {
         // given
@@ -33,7 +34,7 @@ class SwitchWorkspaceTest extends TestCase
         self::assertEquals($secondWorkspace->id, $user->currentWorkspace()->id);
     }
 
-    /** @test */
+    #[Test]
     public function a_user_cannot_switch_to_a_workspace_they_do_not_belong_to()
     {
         // given
@@ -51,7 +52,7 @@ class SwitchWorkspaceTest extends TestCase
         self::assertEquals($workspace->id, $user->currentWorkspace()->id);
     }
 
-    /** @test */
+    #[Test]
     public function a_guest_cannot_switch_workspaces()
     {
         // given

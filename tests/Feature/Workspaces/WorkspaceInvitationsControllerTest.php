@@ -11,6 +11,7 @@ use App\Services\Workspaces\AddWorkspaceMember;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Mail;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class WorkspaceInvitationsControllerTest extends TestCase
@@ -18,7 +19,7 @@ class WorkspaceInvitationsControllerTest extends TestCase
     use RefreshDatabase;
     use WithFaker;
 
-    /** @test */
+    #[Test]
     public function an_invitation_can_be_sent_to_a_new_user()
     {
         // given
@@ -47,7 +48,7 @@ class WorkspaceInvitationsControllerTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function an_invitation_can_be_sent_to_an_existing_user()
     {
         // given
@@ -70,7 +71,7 @@ class WorkspaceInvitationsControllerTest extends TestCase
         $this->assertDatabaseEmpty('invitations');
     }
 
-    /** @test */
+    #[Test]
     public function non_owners_cannot_invite_new_members()
     {
         // given
@@ -101,7 +102,7 @@ class WorkspaceInvitationsControllerTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function invitations_can_be_retracted()
     {
         // given

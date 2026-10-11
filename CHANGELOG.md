@@ -1,5 +1,11 @@
 # Sendportal
 
+## 4.0.0 - Unreleased
+- Update to Laravel 13 and sendportal-core 4
+- Require PHP 8.3+
+- Rename `VerifyCsrfToken` middleware to `PreventRequestForgery`
+- Upgrade to PHPUnit 12 and convert test annotations to attributes
+
 ## 3.0.0 - 2024-04-19
 - Update to Laravel 11 ([#290](https://github.com/mettle/sendportal/pull/290)
 

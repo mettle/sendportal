@@ -9,20 +9,21 @@ use App\Setup\Admin;
 use App\Setup\Env;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class SetupTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function the_setup_component_should_render_the_correct_view()
     {
         Livewire::test(Setup::class)
             ->assertViewIs('livewire.setup');
     }
 
-    /** @test */
+    #[Test]
     public function the_setup_component_should_have_6_steps()
     {
         $setup = Livewire::test(Setup::class);
@@ -30,7 +31,7 @@ class SetupTest extends TestCase
         self::assertCount(6, $setup->get('steps'));
     }
 
-    /** @test */
+    #[Test]
     public function the_setup_component_should_check_the_first_step_when_mounted_and_stop_if_its_false()
     {
         $this->mock(
@@ -46,7 +47,7 @@ class SetupTest extends TestCase
         $setup->assertSet('progress', 0);
     }
 
-    /** @test */
+    #[Test]
     public function the_setup_command_should_stop_on_the_admin_step_if_there_are_not_users()
     {
         $setup = Livewire::test(Setup::class);

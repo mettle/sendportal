@@ -8,6 +8,8 @@ use App\Models\ApiToken;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class WorkspaceApiTokenTest extends TestCase
@@ -15,11 +17,8 @@ class WorkspaceApiTokenTest extends TestCase
     use RefreshDatabase;
     use WithFaker;
 
-    /**
-     * @test
-     *
-     * @group workspace_user_test
-     */
+    #[Test]
+    #[Group('workspace_user_test')]
     public function valid_api_token_grants_access()
     {
         [$workspace, $user] = $this->createUserAndWorkspace();
@@ -37,7 +36,7 @@ class WorkspaceApiTokenTest extends TestCase
         $response->assertStatus(200);
     }
 
-    /** @test */
+    #[Test]
     public function a_401_is_thrown_when_invalid_token_provided()
     {
         [$workspace, $user] = $this->createUserAndWorkspace();
@@ -55,7 +54,7 @@ class WorkspaceApiTokenTest extends TestCase
         $response->assertUnauthorized();
     }
 
-    /** @test */
+    #[Test]
     public function a_401_is_thrown_when_no_token_is_provided()
     {
         $response = $this->get(route('sendportal.api.subscribers.index'));
