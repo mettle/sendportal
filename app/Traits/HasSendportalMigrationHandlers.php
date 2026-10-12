@@ -38,7 +38,12 @@ trait HasSendportalMigrationHandlers
             return false;
         }
 
-        $this->call('migrate');
+        // The user has already confirmed, so skip migrate's production prompt. When sp:install creates
+        // the .env file, the running application is still in production and that prompt defaults to no.
+        if ($this->call('migrate', ['--force' => true]) !== self::SUCCESS) {
+            return false;
+        }
+
         $this->info('✓ Database migrations successful');
 
         return true;
