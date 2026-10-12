@@ -7,17 +7,16 @@ namespace Tests\Feature\Workspaces;
 use App\Models\User;
 use App\Models\Workspace;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class WorkspaceUserControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test
-     *
-     * @group workspace_user_test
-     */
+    #[Test]
+    #[Group('workspace_user_test')]
     public function an_unauthenticated_user_cannot_view_the_workspace_user_index()
     {
         $response = $this->get(route('users.index'));
@@ -25,11 +24,8 @@ class WorkspaceUserControllerTest extends TestCase
         $this->assertLoginRedirect($response);
     }
 
-    /**
-     * @test
-     *
-     * @group workspace_user_test
-     */
+    #[Test]
+    #[Group('workspace_user_test')]
     public function users_cannot_view_workspace_users_for_a_workspace_they_do_not_own()
     {
         $user = User::factory()
@@ -46,11 +42,8 @@ class WorkspaceUserControllerTest extends TestCase
         $response->assertStatus(404);
     }
 
-    /**
-     * @test
-     *
-     * @group workspace_user_test
-     */
+    #[Test]
+    #[Group('workspace_user_test')]
     public function users_can_view_workspace_users_for_a_workspace_they_do_own()
     {
         $user = $this->createUserWithWorkspace();
@@ -62,11 +55,8 @@ class WorkspaceUserControllerTest extends TestCase
         $response->assertSee($user->name);
     }
 
-    /**
-     * @test
-     *
-     * @group workspace_user_test
-     */
+    #[Test]
+    #[Group('workspace_user_test')]
     public function workspace_owners_can_remove_users_from_their_workspace()
     {
         $user = $this->createUserWithWorkspace();
@@ -82,11 +72,8 @@ class WorkspaceUserControllerTest extends TestCase
         self::assertFalse($otherUser->fresh()->onWorkspace($workspace));
     }
 
-    /**
-     * @test
-     *
-     * @group workspace_user_test
-     */
+    #[Test]
+    #[Group('workspace_user_test')]
     public function workspace_owners_cannot_remove_themselves_from_their_workspace()
     {
         [$workspace, $user] = $this->createUserAndWorkspace();
@@ -99,11 +86,8 @@ class WorkspaceUserControllerTest extends TestCase
         self::assertTrue($user->onWorkspace($workspace));
     }
 
-    /**
-     * @test
-     *
-     * @group workspace_user_test
-     */
+    #[Test]
+    #[Group('workspace_user_test')]
     public function only_workspace_owners_can_remove_users_from_a_workspace()
     {
         $user = User::factory()
