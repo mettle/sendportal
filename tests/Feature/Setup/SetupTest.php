@@ -7,6 +7,7 @@ namespace Tests\Feature\Setup;
 use App\Livewire\Setup;
 use App\Setup\Admin;
 use App\Setup\Env;
+use App\Setup\Url;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use PHPUnit\Framework\Attributes\Test;
@@ -50,6 +51,14 @@ class SetupTest extends TestCase
     #[Test]
     public function the_setup_command_should_stop_on_the_admin_step_if_there_are_not_users()
     {
+        // These steps depend on the local .env file and APP_URL rather than the code under test.
+        $this->mock(Env::class, function ($mock) {
+            $mock->shouldReceive('check')->andReturn(true);
+        });
+        $this->mock(Url::class, function ($mock) {
+            $mock->shouldReceive('check')->andReturn(true);
+        });
+
         $setup = Livewire::test(Setup::class);
 
         $setup->assertSet('active', 5);
@@ -58,6 +67,6 @@ class SetupTest extends TestCase
         $step = $setup->get('steps')[$setup->get('active')];
 
         self::assertEquals(Admin::class, $step['handler']);
-        self::assertEquals(5, $step['completed']);
+        self::assertFalse($step['completed']);
     }
 }
