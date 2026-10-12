@@ -19,9 +19,11 @@ The [SendPortal](https://github.com/mettle/sendportal) application acts as a wra
 
 ## Installation
 
-If you would like to install SendPortal as a stand-alone application, please follow the [installation guide](https://sendportal.io/docs/v2/getting-started/installation).
+If you would like to install SendPortal as a stand-alone application, please follow the [installation guide](https://sendportal.io/docs/v4/getting-started/installation).
 
-If you would like to add SendPortal to an existing application, please follow the [package installation guide](https://sendportal.io/docs/v2/getting-started/package-installation).
+If you would like to add SendPortal to an existing application, please follow the [package installation guide](https://sendportal.io/docs/v4/getting-started/package-installation).
+
+If you are upgrading from SendPortal V3, please follow the [upgrade guide](https://sendportal.io/docs/v4/getting-started/upgrade-guide).
 
 ## Requirements
 SendPortal V4 requires:
