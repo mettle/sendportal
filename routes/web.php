@@ -21,9 +21,6 @@ Route::get('setup', 'SetupController@index')->name('setup');
 // Auth.
 Route::middleware('auth')->namespace('Auth')->group(
     static function (Router $authRouter) {
-        // Logout.
-        $authRouter->get('logout', 'LoginController@logout')->name('logout');
-
         // Profile.
         $authRouter->middleware('verified')->name('profile.')->prefix('profile')->group(
             static function (
