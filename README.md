@@ -25,6 +25,11 @@ If you would like to add SendPortal to an existing application, please follow th
 
 If you are upgrading from SendPortal V3, please follow the [upgrade guide](https://sendportal.io/docs/v4/getting-started/upgrade-guide).
 
+## One-Click Deploy
+
+<a href="https://repocloud.io/details/SendPortal/"><img src="https://d16t0pc4846x52.cloudfront.net/deploylobe.svg" alt="Deploy on RepoCloud" height="42"></a>
+<a href="https://railway.com/deploy/sendportal"><img src="https://railway.com/button.svg" alt="Deploy on Railway" height="42"></a>
+
 ## Requirements
 SendPortal V4 requires:
 
